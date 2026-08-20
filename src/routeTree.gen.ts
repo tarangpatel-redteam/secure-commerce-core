@@ -48,6 +48,7 @@ import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/
 import { Route as ApiV1LabBoplaSecureProfileRouteImport } from './routes/api/v1/lab/bopla/secure/profile'
 import { Route as ApiV1LabBrokenAuthSecureLoginRouteImport } from './routes/api/v1/lab/broken-auth/secure/login'
 import { Route as ApiV1LabBrokenAuthSecureRecoveryRouteImport } from './routes/api/v1/lab/broken-auth/secure/recovery'
+import { Route as ApiV1LabResourceConsumptionSecureExportRouteImport } from './routes/api/v1/lab/resource-consumption/secure/export'
 import { Route as ApiV1LabBflaOrdersIdStatusRouteImport } from './routes/api/v1/lab/bfla/orders/$id/status'
 import { Route as ApiV1LabBolaOrdersIdAccessRouteImport } from './routes/api/v1/lab/bola/orders/$id/access'
 import { Route as ApiV1LabBflaSecureOrdersIdStatusRouteImport } from './routes/api/v1/lab/bfla/secure/orders/$id/status'
@@ -255,6 +256,12 @@ const ApiV1LabBrokenAuthSecureRecoveryRoute =
     path: '/api/v1/lab/broken-auth/secure/recovery',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiV1LabResourceConsumptionSecureExportRoute =
+  ApiV1LabResourceConsumptionSecureExportRouteImport.update({
+    id: '/api/v1/lab/resource-consumption/secure/export',
+    path: '/api/v1/lab/resource-consumption/secure/export',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiV1LabBflaOrdersIdStatusRoute =
   ApiV1LabBflaOrdersIdStatusRouteImport.update({
     id: '/api/v1/lab/bfla/orders/$id/status',
@@ -320,6 +327,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/lab/bopla/secure/profile': typeof ApiV1LabBoplaSecureProfileRoute
   '/api/v1/lab/broken-auth/secure/login': typeof ApiV1LabBrokenAuthSecureLoginRoute
   '/api/v1/lab/broken-auth/secure/recovery': typeof ApiV1LabBrokenAuthSecureRecoveryRoute
+  '/api/v1/lab/resource-consumption/secure/export': typeof ApiV1LabResourceConsumptionSecureExportRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
   '/api/v1/lab/bfla/secure/orders/$id/status': typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -365,6 +373,7 @@ export interface FileRoutesByTo {
   '/api/v1/lab/bopla/secure/profile': typeof ApiV1LabBoplaSecureProfileRoute
   '/api/v1/lab/broken-auth/secure/login': typeof ApiV1LabBrokenAuthSecureLoginRoute
   '/api/v1/lab/broken-auth/secure/recovery': typeof ApiV1LabBrokenAuthSecureRecoveryRoute
+  '/api/v1/lab/resource-consumption/secure/export': typeof ApiV1LabResourceConsumptionSecureExportRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
   '/api/v1/lab/bfla/secure/orders/$id/status': typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -411,6 +420,7 @@ export interface FileRoutesById {
   '/api/v1/lab/bopla/secure/profile': typeof ApiV1LabBoplaSecureProfileRoute
   '/api/v1/lab/broken-auth/secure/login': typeof ApiV1LabBrokenAuthSecureLoginRoute
   '/api/v1/lab/broken-auth/secure/recovery': typeof ApiV1LabBrokenAuthSecureRecoveryRoute
+  '/api/v1/lab/resource-consumption/secure/export': typeof ApiV1LabResourceConsumptionSecureExportRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
   '/api/v1/lab/bfla/secure/orders/$id/status': typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -458,6 +468,7 @@ export interface FileRouteTypes {
     | '/api/v1/lab/bopla/secure/profile'
     | '/api/v1/lab/broken-auth/secure/login'
     | '/api/v1/lab/broken-auth/secure/recovery'
+    | '/api/v1/lab/resource-consumption/secure/export'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
     | '/api/v1/lab/bfla/secure/orders/$id/status'
@@ -503,6 +514,7 @@ export interface FileRouteTypes {
     | '/api/v1/lab/bopla/secure/profile'
     | '/api/v1/lab/broken-auth/secure/login'
     | '/api/v1/lab/broken-auth/secure/recovery'
+    | '/api/v1/lab/resource-consumption/secure/export'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
     | '/api/v1/lab/bfla/secure/orders/$id/status'
@@ -548,6 +560,7 @@ export interface FileRouteTypes {
     | '/api/v1/lab/bopla/secure/profile'
     | '/api/v1/lab/broken-auth/secure/login'
     | '/api/v1/lab/broken-auth/secure/recovery'
+    | '/api/v1/lab/resource-consumption/secure/export'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
     | '/api/v1/lab/bfla/secure/orders/$id/status'
@@ -594,6 +607,7 @@ export interface RootRouteChildren {
   ApiV1LabBoplaSecureProfileRoute: typeof ApiV1LabBoplaSecureProfileRoute
   ApiV1LabBrokenAuthSecureLoginRoute: typeof ApiV1LabBrokenAuthSecureLoginRoute
   ApiV1LabBrokenAuthSecureRecoveryRoute: typeof ApiV1LabBrokenAuthSecureRecoveryRoute
+  ApiV1LabResourceConsumptionSecureExportRoute: typeof ApiV1LabResourceConsumptionSecureExportRoute
   ApiV1LabBflaOrdersIdStatusRoute: typeof ApiV1LabBflaOrdersIdStatusRoute
   ApiV1LabBolaOrdersIdAccessRoute: typeof ApiV1LabBolaOrdersIdAccessRoute
   ApiV1LabBflaSecureOrdersIdStatusRoute: typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -875,6 +889,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1LabBrokenAuthSecureRecoveryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/resource-consumption/secure/export': {
+      id: '/api/v1/lab/resource-consumption/secure/export'
+      path: '/api/v1/lab/resource-consumption/secure/export'
+      fullPath: '/api/v1/lab/resource-consumption/secure/export'
+      preLoaderRoute: typeof ApiV1LabResourceConsumptionSecureExportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/lab/bfla/orders/$id/status': {
       id: '/api/v1/lab/bfla/orders/$id/status'
       path: '/api/v1/lab/bfla/orders/$id/status'
@@ -948,6 +969,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1LabBoplaSecureProfileRoute: ApiV1LabBoplaSecureProfileRoute,
   ApiV1LabBrokenAuthSecureLoginRoute: ApiV1LabBrokenAuthSecureLoginRoute,
   ApiV1LabBrokenAuthSecureRecoveryRoute: ApiV1LabBrokenAuthSecureRecoveryRoute,
+  ApiV1LabResourceConsumptionSecureExportRoute:
+    ApiV1LabResourceConsumptionSecureExportRoute,
   ApiV1LabBflaOrdersIdStatusRoute: ApiV1LabBflaOrdersIdStatusRoute,
   ApiV1LabBolaOrdersIdAccessRoute: ApiV1LabBolaOrdersIdAccessRoute,
   ApiV1LabBflaSecureOrdersIdStatusRoute: ApiV1LabBflaSecureOrdersIdStatusRoute,
