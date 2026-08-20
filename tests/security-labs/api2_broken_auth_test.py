@@ -155,3 +155,21 @@ check("vulnerable recovery accepts the code after many attempts",
 check("vulnerable recovery token is predictable",
       str(hit["data"]["recoveryToken"]).startswith(f"lab-reset-{USER}-"))
 check("vulnerable recovery ignores expiry", hit["data"]["expiryEnforced"] is False)
+
+req(f"{BASE}{V}", "POST", None, auth(T))
+blocked_at = None
+for n in range(0, 10):
+    _, r = req(f"{BASE}{S}/recovery", "POST", {"username": USER, "code": f"{n:04d}"}, auth(T))
+    if r["data"]["reason"] == "too_many_attempts" and blocked_at is None:
+        blocked_at = n
+check("secure recovery caps attempts at 5", blocked_at == 5, blocked_at)
+_, late = req(f"{BASE}{S}/recovery", "POST", {"username": USER, "code": OTP}, auth(T))
+check("secure recovery rejects the right code once capped", late["data"]["verified"] is False)
+check("secure recovery enforces expiry", late["data"]["expiryEnforced"] is True)
+
+req(f"{BASE}{V}", "POST", None, auth(T))
+_, good = req(f"{BASE}{S}/recovery", "POST", {"username": USER, "code": OTP}, auth(T))
+check("secure recovery accepts a valid code", good["data"]["verified"] is True)
+check("secure recovery token is random hex", len(str(good["data"]["recoveryToken"])) == 64)
+_, unknown = req(f"{BASE}{S}/recovery", "POST", {"username": "ghost.user", "code": OTP}, auth(T))
+check("secure recovery does not enumerate", unknown["data"]["reason"] == "invalid_code")
