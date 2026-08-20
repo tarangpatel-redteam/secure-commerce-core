@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiV1CategoriesRouteImport } from './routes/api/v1/categories'
+import { Route as ApiV1MeRouteImport } from './routes/api/v1/me'
+import { Route as ApiV1ProductsIndexRouteImport } from './routes/api/v1/products/index'
+import { Route as ApiV1ProductsSlugRouteImport } from './routes/api/v1/products/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1CategoriesRoute = ApiV1CategoriesRouteImport.update({
+  id: '/api/v1/categories',
+  path: '/api/v1/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1MeRoute = ApiV1MeRouteImport.update({
+  id: '/api/v1/me',
+  path: '/api/v1/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1ProductsIndexRoute = ApiV1ProductsIndexRouteImport.update({
+  id: '/api/v1/products/',
+  path: '/api/v1/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1ProductsSlugRoute = ApiV1ProductsSlugRouteImport.update({
+  id: '/api/v1/products/$slug',
+  path: '/api/v1/products/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/v1/categories': typeof ApiV1CategoriesRoute
+  '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
+  '/api/v1/products/': typeof ApiV1ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/v1/categories': typeof ApiV1CategoriesRoute
+  '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
+  '/api/v1/products': typeof ApiV1ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/v1/categories': typeof ApiV1CategoriesRoute
+  '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
+  '/api/v1/products/': typeof ApiV1ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/v1/categories'
+    | '/api/v1/me'
+    | '/api/v1/products/$slug'
+    | '/api/v1/products/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/v1/categories'
+    | '/api/v1/me'
+    | '/api/v1/products/$slug'
+    | '/api/v1/products'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/v1/categories'
+    | '/api/v1/me'
+    | '/api/v1/products/$slug'
+    | '/api/v1/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiV1CategoriesRoute: typeof ApiV1CategoriesRoute
+  ApiV1MeRoute: typeof ApiV1MeRoute
+  ApiV1ProductsSlugRoute: typeof ApiV1ProductsSlugRoute
+  ApiV1ProductsIndexRoute: typeof ApiV1ProductsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/categories': {
+      id: '/api/v1/categories'
+      path: '/api/v1/categories'
+      fullPath: '/api/v1/categories'
+      preLoaderRoute: typeof ApiV1CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/me': {
+      id: '/api/v1/me'
+      path: '/api/v1/me'
+      fullPath: '/api/v1/me'
+      preLoaderRoute: typeof ApiV1MeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/products/': {
+      id: '/api/v1/products/'
+      path: '/api/v1/products'
+      fullPath: '/api/v1/products/'
+      preLoaderRoute: typeof ApiV1ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/products/$slug': {
+      id: '/api/v1/products/$slug'
+      path: '/api/v1/products/$slug'
+      fullPath: '/api/v1/products/$slug'
+      preLoaderRoute: typeof ApiV1ProductsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiV1CategoriesRoute: ApiV1CategoriesRoute,
+  ApiV1MeRoute: ApiV1MeRoute,
+  ApiV1ProductsSlugRoute: ApiV1ProductsSlugRoute,
+  ApiV1ProductsIndexRoute: ApiV1ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
