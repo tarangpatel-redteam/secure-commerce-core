@@ -124,6 +124,60 @@ export type Database = {
         }
         Relationships: []
       }
+      lab_bopla_profiles: {
+        Row: {
+          account_credit_cents: number
+          created_at: string
+          date_of_birth: string | null
+          display_name: string
+          email: string
+          id: string
+          internal_notes: string
+          internal_risk_score: number
+          is_vip: boolean
+          loyalty_tier: string
+          marketing_opt_in: boolean
+          phone: string
+          support_pin: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_credit_cents?: number
+          created_at?: string
+          date_of_birth?: string | null
+          display_name?: string
+          email?: string
+          id?: string
+          internal_notes?: string
+          internal_risk_score?: number
+          is_vip?: boolean
+          loyalty_tier?: string
+          marketing_opt_in?: boolean
+          phone?: string
+          support_pin?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_credit_cents?: number
+          created_at?: string
+          date_of_birth?: string | null
+          display_name?: string
+          email?: string
+          id?: string
+          internal_notes?: string
+          internal_risk_score?: number
+          is_vip?: boolean
+          loyalty_tier?: string
+          marketing_opt_in?: boolean
+          phone?: string
+          support_pin?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string
@@ -400,6 +454,7 @@ export type Database = {
       is_staff: { Args: { _user_id: string }; Returns: boolean }
       lab_bfla_reset: { Args: never; Returns: Json }
       lab_bola_reset: { Args: never; Returns: Json }
+      lab_bopla_reset: { Args: never; Returns: Json }
       place_order: {
         Args: { _address_id: string; _payment_method: string }
         Returns: Json
