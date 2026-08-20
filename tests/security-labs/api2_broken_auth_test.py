@@ -173,3 +173,23 @@ check("secure recovery accepts a valid code", good["data"]["verified"] is True)
 check("secure recovery token is random hex", len(str(good["data"]["recoveryToken"])) == 64)
 _, unknown = req(f"{BASE}{S}/recovery", "POST", {"username": "ghost.user", "code": OTP}, auth(T))
 check("secure recovery does not enumerate", unknown["data"]["reason"] == "invalid_code")
+
+# --- production auth surface is untouched ----------------------------------
+s, _ = req(f"{SB}/auth/v1/token?grant_type=password", "POST",
+           {"email": "customer.a@acme-commerce.test", "password": "wrong-password"},
+           {"apikey": KEY})
+check("production sign-in still rejects bad passwords", s in (400, 401), s)
+s, _ = req(f"{BASE}/api/v1/me", "GET")
+check("production /me still requires a session", s == 401, s)
+s, _ = req(f"{BASE}/api/v1/orders", "GET", None, auth(T))
+check("production orders endpoint still works", s == 200, s)
+
+# --- deterministic reset ----------------------------------------------------
+s, after = req(f"{BASE}{V}", "POST", None, auth(T))
+check("re-run reset succeeds", s == 200, s)
+_, first = req(f"{BASE}{V}/login", "POST", {"username": USER, "password": REAL_PW}, auth(T))
+check("reset restores the session counter",
+      first["data"]["sessionToken"] == f"lab-{USER}-000001", first["data"]["sessionToken"])
+
+print(f"\n{sum(results)}/{len(results)} checks passed")
+sys.exit(0 if all(results) else 1)
