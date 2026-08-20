@@ -46,7 +46,7 @@ function RegisterPage() {
     setErrors({});
     setSubmitting(true);
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: parsed.data.email,
       password: parsed.data.password,
       options: {
@@ -60,9 +60,32 @@ function RegisterPage() {
       toast.error(error.message);
       return;
     }
+    if (!data.session) {
+      // Email confirmation is enabled: the user is not signed in yet.
+      setPendingConfirmation(true);
+      return;
+    }
     toast.success("Account created");
     void navigate({ to: "/account", replace: true });
   }
+
+  if (pendingConfirmation) {
+    return (
+      <div className="container-page flex justify-center py-24">
+        <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 text-center shadow-card">
+          <h1 className="text-2xl">Confirm your email</h1>
+          <p className="mt-3 text-sm text-muted-foreground">
+            We sent a confirmation link to <strong>{form.email}</strong>. Open it to activate your
+            account, then sign in.
+          </p>
+          <Button className="mt-6" asChild>
+            <Link to="/login">Go to sign in</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="container-page flex justify-center py-20">
