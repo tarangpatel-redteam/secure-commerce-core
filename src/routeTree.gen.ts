@@ -33,6 +33,7 @@ import { Route as ApiV1StaffCustomersRouteImport } from './routes/api/v1/staff/c
 import { Route as ApiV1CartItemsItemIdRouteImport } from './routes/api/v1/cart/items/$itemId'
 import { Route as ApiV1LabBflaIndexRouteImport } from './routes/api/v1/lab/bfla/index'
 import { Route as ApiV1LabBolaIndexRouteImport } from './routes/api/v1/lab/bola/index'
+import { Route as ApiV1LabBoplaIndexRouteImport } from './routes/api/v1/lab/bopla/index'
 import { Route as ApiV1OrdersIdIndexRouteImport } from './routes/api/v1/orders/$id/index'
 import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/$id/cancel'
 import { Route as ApiV1LabBflaOrdersIdStatusRouteImport } from './routes/api/v1/lab/bfla/orders/$id/status'
@@ -160,6 +161,11 @@ const ApiV1LabBolaIndexRoute = ApiV1LabBolaIndexRouteImport.update({
   path: '/api/v1/lab/bola/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1LabBoplaIndexRoute = ApiV1LabBoplaIndexRouteImport.update({
+  id: '/api/v1/lab/bopla/',
+  path: '/api/v1/lab/bopla/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiV1OrdersIdIndexRoute = ApiV1OrdersIdIndexRouteImport.update({
   id: '/api/v1/orders/$id/',
   path: '/api/v1/orders/$id/',
@@ -221,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bfla/': typeof ApiV1LabBflaIndexRoute
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
+  '/api/v1/lab/bopla/': typeof ApiV1LabBoplaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
@@ -253,6 +260,7 @@ export interface FileRoutesByTo {
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bfla': typeof ApiV1LabBflaIndexRoute
   '/api/v1/lab/bola': typeof ApiV1LabBolaIndexRoute
+  '/api/v1/lab/bopla': typeof ApiV1LabBoplaIndexRoute
   '/api/v1/orders/$id': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
@@ -286,6 +294,7 @@ export interface FileRoutesById {
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bfla/': typeof ApiV1LabBflaIndexRoute
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
+  '/api/v1/lab/bopla/': typeof ApiV1LabBoplaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
@@ -320,6 +329,7 @@ export interface FileRouteTypes {
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bfla/'
     | '/api/v1/lab/bola/'
+    | '/api/v1/lab/bopla/'
     | '/api/v1/orders/$id/'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
@@ -352,6 +362,7 @@ export interface FileRouteTypes {
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bfla'
     | '/api/v1/lab/bola'
+    | '/api/v1/lab/bopla'
     | '/api/v1/orders/$id'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
@@ -384,6 +395,7 @@ export interface FileRouteTypes {
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bfla/'
     | '/api/v1/lab/bola/'
+    | '/api/v1/lab/bopla/'
     | '/api/v1/orders/$id/'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
@@ -417,6 +429,7 @@ export interface RootRouteChildren {
   ApiV1OrdersIdCancelRoute: typeof ApiV1OrdersIdCancelRoute
   ApiV1LabBflaIndexRoute: typeof ApiV1LabBflaIndexRoute
   ApiV1LabBolaIndexRoute: typeof ApiV1LabBolaIndexRoute
+  ApiV1LabBoplaIndexRoute: typeof ApiV1LabBoplaIndexRoute
   ApiV1OrdersIdIndexRoute: typeof ApiV1OrdersIdIndexRoute
   ApiV1LabBflaOrdersIdStatusRoute: typeof ApiV1LabBflaOrdersIdStatusRoute
   ApiV1LabBolaOrdersIdAccessRoute: typeof ApiV1LabBolaOrdersIdAccessRoute
@@ -594,6 +607,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1LabBolaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/bopla/': {
+      id: '/api/v1/lab/bopla/'
+      path: '/api/v1/lab/bopla'
+      fullPath: '/api/v1/lab/bopla/'
+      preLoaderRoute: typeof ApiV1LabBoplaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/orders/$id/': {
       id: '/api/v1/orders/$id/'
       path: '/api/v1/orders/$id'
@@ -665,6 +685,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1OrdersIdCancelRoute: ApiV1OrdersIdCancelRoute,
   ApiV1LabBflaIndexRoute: ApiV1LabBflaIndexRoute,
   ApiV1LabBolaIndexRoute: ApiV1LabBolaIndexRoute,
+  ApiV1LabBoplaIndexRoute: ApiV1LabBoplaIndexRoute,
   ApiV1OrdersIdIndexRoute: ApiV1OrdersIdIndexRoute,
   ApiV1LabBflaOrdersIdStatusRoute: ApiV1LabBflaOrdersIdStatusRoute,
   ApiV1LabBolaOrdersIdAccessRoute: ApiV1LabBolaOrdersIdAccessRoute,
