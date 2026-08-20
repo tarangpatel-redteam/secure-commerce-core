@@ -33,6 +33,7 @@ import { Route as ApiV1LabBolaIndexRouteImport } from './routes/api/v1/lab/bola/
 import { Route as ApiV1OrdersIdIndexRouteImport } from './routes/api/v1/orders/$id/index'
 import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/$id/cancel'
 import { Route as ApiV1LabBolaOrdersIdAccessRouteImport } from './routes/api/v1/lab/bola/orders/$id/access'
+import { Route as ApiV1LabBolaSecureOrdersIdAccessRouteImport } from './routes/api/v1/lab/bola/secure/orders/$id/access'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -155,6 +156,12 @@ const ApiV1LabBolaOrdersIdAccessRoute =
     path: '/api/v1/lab/bola/orders/$id/access',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiV1LabBolaSecureOrdersIdAccessRoute =
+  ApiV1LabBolaSecureOrdersIdAccessRouteImport.update({
+    id: '/api/v1/lab/bola/secure/orders/$id/access',
+    path: '/api/v1/lab/bola/secure/orders/$id/access',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -181,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
+  '/api/v1/lab/bola/secure/orders/$id/access': typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -207,6 +215,7 @@ export interface FileRoutesByTo {
   '/api/v1/lab/bola': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
+  '/api/v1/lab/bola/secure/orders/$id/access': typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -234,6 +243,7 @@ export interface FileRoutesById {
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
+  '/api/v1/lab/bola/secure/orders/$id/access': typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
     | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
     | '/api/v1/lab/bola/orders/$id/access'
+    | '/api/v1/lab/bola/secure/orders/$id/access'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/api/v1/lab/bola'
     | '/api/v1/orders/$id'
     | '/api/v1/lab/bola/orders/$id/access'
+    | '/api/v1/lab/bola/secure/orders/$id/access'
   id:
     | '__root__'
     | '/'
@@ -314,6 +326,7 @@ export interface FileRouteTypes {
     | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
     | '/api/v1/lab/bola/orders/$id/access'
+    | '/api/v1/lab/bola/secure/orders/$id/access'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -341,6 +354,7 @@ export interface RootRouteChildren {
   ApiV1LabBolaIndexRoute: typeof ApiV1LabBolaIndexRoute
   ApiV1OrdersIdIndexRoute: typeof ApiV1OrdersIdIndexRoute
   ApiV1LabBolaOrdersIdAccessRoute: typeof ApiV1LabBolaOrdersIdAccessRoute
+  ApiV1LabBolaSecureOrdersIdAccessRoute: typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -513,6 +527,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1LabBolaOrdersIdAccessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/bola/secure/orders/$id/access': {
+      id: '/api/v1/lab/bola/secure/orders/$id/access'
+      path: '/api/v1/lab/bola/secure/orders/$id/access'
+      fullPath: '/api/v1/lab/bola/secure/orders/$id/access'
+      preLoaderRoute: typeof ApiV1LabBolaSecureOrdersIdAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -541,6 +562,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1LabBolaIndexRoute: ApiV1LabBolaIndexRoute,
   ApiV1OrdersIdIndexRoute: ApiV1OrdersIdIndexRoute,
   ApiV1LabBolaOrdersIdAccessRoute: ApiV1LabBolaOrdersIdAccessRoute,
+  ApiV1LabBolaSecureOrdersIdAccessRoute: ApiV1LabBolaSecureOrdersIdAccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
