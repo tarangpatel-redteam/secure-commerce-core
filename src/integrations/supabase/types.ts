@@ -398,6 +398,7 @@ export type Database = {
       }
       is_catalog_manager: { Args: { _user_id: string }; Returns: boolean }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      lab_bola_reset: { Args: never; Returns: Json }
       place_order: {
         Args: { _address_id: string; _payment_method: string }
         Returns: Json
