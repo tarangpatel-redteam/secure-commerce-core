@@ -15,6 +15,7 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LabBolaRouteImport } from './routes/lab/bola'
 import { Route as OrdersIndexRouteImport } from './routes/orders/index'
 import { Route as OrdersIdRouteImport } from './routes/orders/$id'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
@@ -29,8 +30,11 @@ import { Route as ApiV1ProductsIndexRouteImport } from './routes/api/v1/products
 import { Route as ApiV1ProductsSlugRouteImport } from './routes/api/v1/products/$slug'
 import { Route as ApiV1StaffCustomersRouteImport } from './routes/api/v1/staff/customers'
 import { Route as ApiV1CartItemsItemIdRouteImport } from './routes/api/v1/cart/items/$itemId'
+import { Route as ApiV1LabBolaIndexRouteImport } from './routes/api/v1/lab/bola/index'
 import { Route as ApiV1OrdersIdIndexRouteImport } from './routes/api/v1/orders/$id/index'
 import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/$id/cancel'
+import { Route as ApiV1LabBolaOrdersIdAccessRouteImport } from './routes/api/v1/lab/bola/orders/$id/access'
+import { Route as ApiV1LabBolaSecureOrdersIdAccessRouteImport } from './routes/api/v1/lab/bola/secure/orders/$id/access'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -60,6 +64,11 @@ const LoginRoute = LoginRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabBolaRoute = LabBolaRouteImport.update({
+  id: '/lab/bola',
+  path: '/lab/bola',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
@@ -132,6 +141,11 @@ const ApiV1CartItemsItemIdRoute = ApiV1CartItemsItemIdRouteImport.update({
   path: '/api/v1/cart/items/$itemId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1LabBolaIndexRoute = ApiV1LabBolaIndexRouteImport.update({
+  id: '/api/v1/lab/bola/',
+  path: '/api/v1/lab/bola/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiV1OrdersIdIndexRoute = ApiV1OrdersIdIndexRouteImport.update({
   id: '/api/v1/orders/$id/',
   path: '/api/v1/orders/$id/',
@@ -142,6 +156,18 @@ const ApiV1OrdersIdCancelRoute = ApiV1OrdersIdCancelRouteImport.update({
   path: '/api/v1/orders/$id/cancel',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1LabBolaOrdersIdAccessRoute =
+  ApiV1LabBolaOrdersIdAccessRouteImport.update({
+    id: '/api/v1/lab/bola/orders/$id/access',
+    path: '/api/v1/lab/bola/orders/$id/access',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiV1LabBolaSecureOrdersIdAccessRoute =
+  ApiV1LabBolaSecureOrdersIdAccessRouteImport.update({
+    id: '/api/v1/lab/bola/secure/orders/$id/access',
+    path: '/api/v1/lab/bola/secure/orders/$id/access',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -150,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lab/bola': typeof LabBolaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -165,7 +192,10 @@ export interface FileRoutesByFullPath {
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
+  '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
+  '/api/v1/lab/bola/secure/orders/$id/access': typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -174,6 +204,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lab/bola': typeof LabBolaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders': typeof OrdersIndexRoute
@@ -189,7 +220,10 @@ export interface FileRoutesByTo {
   '/api/v1/products': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/lab/bola': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id': typeof ApiV1OrdersIdIndexRoute
+  '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
+  '/api/v1/lab/bola/secure/orders/$id/access': typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -199,6 +233,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lab/bola': typeof LabBolaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -214,7 +249,10 @@ export interface FileRoutesById {
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
+  '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
+  '/api/v1/lab/bola/secure/orders/$id/access': typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -225,6 +263,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/login'
     | '/register'
+    | '/lab/bola'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -240,7 +279,10 @@ export interface FileRouteTypes {
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/orders/$id/cancel'
+    | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
+    | '/api/v1/lab/bola/orders/$id/access'
+    | '/api/v1/lab/bola/secure/orders/$id/access'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -249,6 +291,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/login'
     | '/register'
+    | '/lab/bola'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders'
@@ -264,7 +307,10 @@ export interface FileRouteTypes {
     | '/api/v1/products'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/orders/$id/cancel'
+    | '/api/v1/lab/bola'
     | '/api/v1/orders/$id'
+    | '/api/v1/lab/bola/orders/$id/access'
+    | '/api/v1/lab/bola/secure/orders/$id/access'
   id:
     | '__root__'
     | '/'
@@ -273,6 +319,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/login'
     | '/register'
+    | '/lab/bola'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -288,7 +335,10 @@ export interface FileRouteTypes {
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/orders/$id/cancel'
+    | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
+    | '/api/v1/lab/bola/orders/$id/access'
+    | '/api/v1/lab/bola/secure/orders/$id/access'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -298,6 +348,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  LabBolaRoute: typeof LabBolaRoute
   OrdersIdRoute: typeof OrdersIdRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
@@ -313,7 +364,10 @@ export interface RootRouteChildren {
   ApiV1ProductsIndexRoute: typeof ApiV1ProductsIndexRoute
   ApiV1CartItemsItemIdRoute: typeof ApiV1CartItemsItemIdRoute
   ApiV1OrdersIdCancelRoute: typeof ApiV1OrdersIdCancelRoute
+  ApiV1LabBolaIndexRoute: typeof ApiV1LabBolaIndexRoute
   ApiV1OrdersIdIndexRoute: typeof ApiV1OrdersIdIndexRoute
+  ApiV1LabBolaOrdersIdAccessRoute: typeof ApiV1LabBolaOrdersIdAccessRoute
+  ApiV1LabBolaSecureOrdersIdAccessRoute: typeof ApiV1LabBolaSecureOrdersIdAccessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -358,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/bola': {
+      id: '/lab/bola'
+      path: '/lab/bola'
+      fullPath: '/lab/bola'
+      preLoaderRoute: typeof LabBolaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders/': {
@@ -458,6 +519,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1CartItemsItemIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/bola/': {
+      id: '/api/v1/lab/bola/'
+      path: '/api/v1/lab/bola'
+      fullPath: '/api/v1/lab/bola/'
+      preLoaderRoute: typeof ApiV1LabBolaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/orders/$id/': {
       id: '/api/v1/orders/$id/'
       path: '/api/v1/orders/$id'
@@ -472,6 +540,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1OrdersIdCancelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/bola/orders/$id/access': {
+      id: '/api/v1/lab/bola/orders/$id/access'
+      path: '/api/v1/lab/bola/orders/$id/access'
+      fullPath: '/api/v1/lab/bola/orders/$id/access'
+      preLoaderRoute: typeof ApiV1LabBolaOrdersIdAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/lab/bola/secure/orders/$id/access': {
+      id: '/api/v1/lab/bola/secure/orders/$id/access'
+      path: '/api/v1/lab/bola/secure/orders/$id/access'
+      fullPath: '/api/v1/lab/bola/secure/orders/$id/access'
+      preLoaderRoute: typeof ApiV1LabBolaSecureOrdersIdAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -482,6 +564,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  LabBolaRoute: LabBolaRoute,
   OrdersIdRoute: OrdersIdRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   OrdersIndexRoute: OrdersIndexRoute,
@@ -497,7 +580,10 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1ProductsIndexRoute: ApiV1ProductsIndexRoute,
   ApiV1CartItemsItemIdRoute: ApiV1CartItemsItemIdRoute,
   ApiV1OrdersIdCancelRoute: ApiV1OrdersIdCancelRoute,
+  ApiV1LabBolaIndexRoute: ApiV1LabBolaIndexRoute,
   ApiV1OrdersIdIndexRoute: ApiV1OrdersIdIndexRoute,
+  ApiV1LabBolaOrdersIdAccessRoute: ApiV1LabBolaOrdersIdAccessRoute,
+  ApiV1LabBolaSecureOrdersIdAccessRoute: ApiV1LabBolaSecureOrdersIdAccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
