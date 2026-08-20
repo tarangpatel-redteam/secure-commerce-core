@@ -176,8 +176,8 @@ check("dataset deterministic after reset",
 # --- production endpoints unaffected ---------------------------------------
 s, b, _ = req(f"{BASE}/api/v1/products?limit=100000", "GET")
 check("production catalog still public", s == 200, s)
-check("production catalog clamps page size", len(b["data"]["products"]) <= 100,
-      len(b["data"]["products"]))
+check("production catalog clamps page size", len(b["data"]["items"]) <= 100,
+      len(b["data"]["items"]))
 s, b, _ = req(f"{BASE}/api/v1/me", "GET")
 check("production /me still requires a session", s == 401, s)
 s, b, _ = req(f"{BASE}/api/v1/orders", "GET", None, auth(cust_a))
