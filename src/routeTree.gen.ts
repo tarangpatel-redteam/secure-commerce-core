@@ -18,6 +18,7 @@ import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as ProductsSlugRouteImport } from './routes/products/$slug'
 import { Route as ApiV1CategoriesRouteImport } from './routes/api/v1/categories'
 import { Route as ApiV1MeRouteImport } from './routes/api/v1/me'
+import { Route as ApiV1AddressesIndexRouteImport } from './routes/api/v1/addresses/index'
 import { Route as ApiV1CartIndexRouteImport } from './routes/api/v1/cart/index'
 import { Route as ApiV1ProductsIndexRouteImport } from './routes/api/v1/products/index'
 import { Route as ApiV1ProductsSlugRouteImport } from './routes/api/v1/products/$slug'
@@ -69,6 +70,11 @@ const ApiV1MeRoute = ApiV1MeRouteImport.update({
   path: '/api/v1/me',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1AddressesIndexRoute = ApiV1AddressesIndexRouteImport.update({
+  id: '/api/v1/addresses/',
+  path: '/api/v1/addresses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiV1CartIndexRoute = ApiV1CartIndexRouteImport.update({
   id: '/api/v1/cart/',
   path: '/api/v1/cart/',
@@ -107,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
+  '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart/': typeof ApiV1CartIndexRoute
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
+  '/api/v1/addresses': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart': typeof ApiV1CartIndexRoute
   '/api/v1/products': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
+  '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart/': typeof ApiV1CartIndexRoute
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
@@ -158,6 +167,7 @@ export interface FileRouteTypes {
     | '/api/v1/me'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
+    | '/api/v1/addresses/'
     | '/api/v1/cart/'
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
     | '/api/v1/me'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
+    | '/api/v1/addresses'
     | '/api/v1/cart'
     | '/api/v1/products'
     | '/api/v1/cart/items/$itemId'
@@ -190,6 +201,7 @@ export interface FileRouteTypes {
     | '/api/v1/me'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
+    | '/api/v1/addresses/'
     | '/api/v1/cart/'
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
@@ -207,6 +219,7 @@ export interface RootRouteChildren {
   ApiV1MeRoute: typeof ApiV1MeRoute
   ApiV1ProductsSlugRoute: typeof ApiV1ProductsSlugRoute
   ApiV1StaffCustomersRoute: typeof ApiV1StaffCustomersRoute
+  ApiV1AddressesIndexRoute: typeof ApiV1AddressesIndexRoute
   ApiV1CartIndexRoute: typeof ApiV1CartIndexRoute
   ApiV1ProductsIndexRoute: typeof ApiV1ProductsIndexRoute
   ApiV1CartItemsItemIdRoute: typeof ApiV1CartItemsItemIdRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1MeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/addresses/': {
+      id: '/api/v1/addresses/'
+      path: '/api/v1/addresses'
+      fullPath: '/api/v1/addresses/'
+      preLoaderRoute: typeof ApiV1AddressesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/cart/': {
       id: '/api/v1/cart/'
       path: '/api/v1/cart'
@@ -327,6 +347,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1MeRoute: ApiV1MeRoute,
   ApiV1ProductsSlugRoute: ApiV1ProductsSlugRoute,
   ApiV1StaffCustomersRoute: ApiV1StaffCustomersRoute,
+  ApiV1AddressesIndexRoute: ApiV1AddressesIndexRoute,
   ApiV1CartIndexRoute: ApiV1CartIndexRoute,
   ApiV1ProductsIndexRoute: ApiV1ProductsIndexRoute,
   ApiV1CartItemsItemIdRoute: ApiV1CartItemsItemIdRoute,

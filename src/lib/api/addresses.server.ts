@@ -26,13 +26,13 @@ export type AddressInput = {
   label: string;
   recipientName: string;
   line1: string;
-  line2?: string;
+  line2?: string | undefined;
   city: string;
-  state?: string;
+  state?: string | undefined;
   postalCode: string;
   country: string;
-  phone?: string;
-  isDefault?: boolean;
+  phone?: string | undefined;
+  isDefault?: boolean | undefined;
 };
 
 type Row = Database["public"]["Tables"]["addresses"]["Row"];
