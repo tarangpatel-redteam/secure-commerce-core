@@ -31,6 +31,8 @@ function RegisterPage() {
   const [form, setForm] = useState({ fullName: "", email: "", password: "" });
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [pendingConfirmation, setPendingConfirmation] = useState(false);
+
 
   useEffect(() => {
     if (!loading && session) void navigate({ to: "/account", replace: true });
