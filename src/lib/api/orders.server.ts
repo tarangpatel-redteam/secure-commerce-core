@@ -199,7 +199,7 @@ export async function placeOrder(
   paymentMethod: "test_success" | "test_decline",
 ): Promise<
   | { ok: true; result: CheckoutResult }
-  | { ok: false; reason: CheckoutFailure; detail?: string }
+  | { ok: false; reason: CheckoutFailure; detail?: string | undefined }
 > {
   const { data, error } = await client.rpc("place_order", {
     _address_id: addressId,
