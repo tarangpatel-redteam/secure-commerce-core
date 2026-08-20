@@ -15,6 +15,7 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LabBolaRouteImport } from './routes/lab/bola'
 import { Route as OrdersIndexRouteImport } from './routes/orders/index'
 import { Route as OrdersIdRouteImport } from './routes/orders/$id'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
@@ -63,6 +64,11 @@ const LoginRoute = LoginRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabBolaRoute = LabBolaRouteImport.update({
+  id: '/lab/bola',
+  path: '/lab/bola',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
@@ -170,6 +176,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lab/bola': typeof LabBolaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -197,6 +204,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lab/bola': typeof LabBolaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders': typeof OrdersIndexRoute
@@ -225,6 +233,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/lab/bola': typeof LabBolaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/login'
     | '/register'
+    | '/lab/bola'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -281,6 +291,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/login'
     | '/register'
+    | '/lab/bola'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders'
@@ -308,6 +319,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/login'
     | '/register'
+    | '/lab/bola'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -336,6 +348,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  LabBolaRoute: typeof LabBolaRoute
   OrdersIdRoute: typeof OrdersIdRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
@@ -399,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/bola': {
+      id: '/lab/bola'
+      path: '/lab/bola'
+      fullPath: '/lab/bola'
+      preLoaderRoute: typeof LabBolaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders/': {
@@ -544,6 +564,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  LabBolaRoute: LabBolaRoute,
   OrdersIdRoute: OrdersIdRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   OrdersIndexRoute: OrdersIndexRoute,
