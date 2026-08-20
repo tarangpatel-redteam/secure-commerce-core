@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products/index'
+import { Route as ProductsSlugRouteImport } from './routes/products/$slug'
 import { Route as ApiV1CategoriesRouteImport } from './routes/api/v1/categories'
 import { Route as ApiV1MeRouteImport } from './routes/api/v1/me'
 import { Route as ApiV1CartIndexRouteImport } from './routes/api/v1/cart/index'
@@ -21,6 +23,16 @@ import { Route as ApiV1CartItemsItemIdRouteImport } from './routes/api/v1/cart/i
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsSlugRoute = ProductsSlugRouteImport.update({
+  id: '/products/$slug',
+  path: '/products/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiV1CategoriesRoute = ApiV1CategoriesRouteImport.update({
@@ -61,6 +73,8 @@ const ApiV1CartItemsItemIdRoute = ApiV1CartItemsItemIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products/$slug': typeof ProductsSlugRoute
+  '/products/': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
@@ -71,6 +85,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products/$slug': typeof ProductsSlugRoute
+  '/products': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
@@ -82,6 +98,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products/$slug': typeof ProductsSlugRoute
+  '/products/': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
@@ -94,6 +112,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/products/$slug'
+    | '/products/'
     | '/api/v1/categories'
     | '/api/v1/me'
     | '/api/v1/products/$slug'
@@ -104,6 +124,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/products/$slug'
+    | '/products'
     | '/api/v1/categories'
     | '/api/v1/me'
     | '/api/v1/products/$slug'
@@ -114,6 +136,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/products/$slug'
+    | '/products/'
     | '/api/v1/categories'
     | '/api/v1/me'
     | '/api/v1/products/$slug'
@@ -125,6 +149,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsSlugRoute: typeof ProductsSlugRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
   ApiV1CategoriesRoute: typeof ApiV1CategoriesRoute
   ApiV1MeRoute: typeof ApiV1MeRoute
   ApiV1ProductsSlugRoute: typeof ApiV1ProductsSlugRoute
@@ -141,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/$slug': {
+      id: '/products/$slug'
+      path: '/products/$slug'
+      fullPath: '/products/$slug'
+      preLoaderRoute: typeof ProductsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/v1/categories': {
@@ -197,6 +237,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsSlugRoute: ProductsSlugRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
   ApiV1CategoriesRoute: ApiV1CategoriesRoute,
   ApiV1MeRoute: ApiV1MeRoute,
   ApiV1ProductsSlugRoute: ApiV1ProductsSlugRoute,

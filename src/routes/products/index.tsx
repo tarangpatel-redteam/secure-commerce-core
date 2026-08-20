@@ -44,7 +44,7 @@ export const Route = createFileRoute("/products/")({
 
 function ProductsPage() {
   const search = Route.useSearch();
-  const navigate = useNavigate({ from: "/products" });
+  const navigate = useNavigate({ from: "/products/" });
   const categories = useCategories();
   const [term, setTerm] = useState(search.search ?? "");
 
