@@ -19,6 +19,7 @@ import { Route as LabBflaRouteImport } from './routes/lab/bfla'
 import { Route as LabBolaRouteImport } from './routes/lab/bola'
 import { Route as LabBoplaRouteImport } from './routes/lab/bopla'
 import { Route as LabBrokenAuthRouteImport } from './routes/lab/broken-auth'
+import { Route as LabResourceConsumptionRouteImport } from './routes/lab/resource-consumption'
 import { Route as OrdersIndexRouteImport } from './routes/orders/index'
 import { Route as OrdersIdRouteImport } from './routes/orders/$id'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
@@ -103,6 +104,11 @@ const LabBoplaRoute = LabBoplaRouteImport.update({
 const LabBrokenAuthRoute = LabBrokenAuthRouteImport.update({
   id: '/lab/broken-auth',
   path: '/lab/broken-auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabResourceConsumptionRoute = LabResourceConsumptionRouteImport.update({
+  id: '/lab/resource-consumption',
+  path: '/lab/resource-consumption',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
@@ -305,6 +311,7 @@ export interface FileRoutesByFullPath {
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
   '/lab/broken-auth': typeof LabBrokenAuthRoute
+  '/lab/resource-consumption': typeof LabResourceConsumptionRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -352,6 +359,7 @@ export interface FileRoutesByTo {
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
   '/lab/broken-auth': typeof LabBrokenAuthRoute
+  '/lab/resource-consumption': typeof LabResourceConsumptionRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders': typeof OrdersIndexRoute
@@ -400,6 +408,7 @@ export interface FileRoutesById {
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
   '/lab/broken-auth': typeof LabBrokenAuthRoute
+  '/lab/resource-consumption': typeof LabResourceConsumptionRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -449,6 +458,7 @@ export interface FileRouteTypes {
     | '/lab/bola'
     | '/lab/bopla'
     | '/lab/broken-auth'
+    | '/lab/resource-consumption'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -496,6 +506,7 @@ export interface FileRouteTypes {
     | '/lab/bola'
     | '/lab/bopla'
     | '/lab/broken-auth'
+    | '/lab/resource-consumption'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders'
@@ -543,6 +554,7 @@ export interface FileRouteTypes {
     | '/lab/bola'
     | '/lab/bopla'
     | '/lab/broken-auth'
+    | '/lab/resource-consumption'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -591,6 +603,7 @@ export interface RootRouteChildren {
   LabBolaRoute: typeof LabBolaRoute
   LabBoplaRoute: typeof LabBoplaRoute
   LabBrokenAuthRoute: typeof LabBrokenAuthRoute
+  LabResourceConsumptionRoute: typeof LabResourceConsumptionRoute
   OrdersIdRoute: typeof OrdersIdRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
@@ -698,6 +711,13 @@ declare module '@tanstack/react-router' {
       path: '/lab/broken-auth'
       fullPath: '/lab/broken-auth'
       preLoaderRoute: typeof LabBrokenAuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/resource-consumption': {
+      id: '/lab/resource-consumption'
+      path: '/lab/resource-consumption'
+      fullPath: '/lab/resource-consumption'
+      preLoaderRoute: typeof LabResourceConsumptionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders/': {
@@ -959,6 +979,7 @@ const rootRouteChildren: RootRouteChildren = {
   LabBolaRoute: LabBolaRoute,
   LabBoplaRoute: LabBoplaRoute,
   LabBrokenAuthRoute: LabBrokenAuthRoute,
+  LabResourceConsumptionRoute: LabResourceConsumptionRoute,
   OrdersIdRoute: OrdersIdRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   OrdersIndexRoute: OrdersIndexRoute,
