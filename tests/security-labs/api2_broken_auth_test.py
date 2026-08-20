@@ -135,3 +135,23 @@ stok = ok["data"]["sessionToken"]
 _, ok2 = req(f"{BASE}{S}/login", "POST", {"username": USER, "password": REAL_PW}, auth(T))
 check("secure token is 256-bit random hex", len(stok) == 64 and stok != ok2["data"]["sessionToken"])
 check("secure token strategy reported", ok["data"]["tokenStrategy"] == "csprng-256bit")
+
+# --- recovery code brute force ---------------------------------------------
+req(f"{BASE}{V}", "POST", None, auth(T))
+found = None
+for n in range(0, 600):
+    code = f"{n:04d}"
+    _, r = req(f"{BASE}{V}/recovery", "POST", {"username": USER, "code": code}, auth(T))
+    if r["data"]["reason"] == "too_many_attempts":
+        found = "blocked"
+        break
+    if r["data"]["verified"]:
+        found = code
+        break
+check("vulnerable recovery never throttles", found != "blocked", found)
+_, hit = req(f"{BASE}{V}/recovery", "POST", {"username": USER, "code": OTP}, auth(T))
+check("vulnerable recovery accepts the code after many attempts",
+      hit["data"]["verified"] is True and hit["data"]["attempts"] > 5, hit["data"]["attempts"])
+check("vulnerable recovery token is predictable",
+      str(hit["data"]["recoveryToken"]).startswith(f"lab-reset-{USER}-"))
+check("vulnerable recovery ignores expiry", hit["data"]["expiryEnforced"] is False)
