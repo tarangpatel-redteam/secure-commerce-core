@@ -40,6 +40,9 @@ Isolated, synthetic training scenarios. Vulnerable behaviour is scoped to
 | 5 | API3:2023 — Broken Object Property Level Authorization | `/lab/bopla` | [docs](docs/security-labs/api3-bopla.md) |
 | 6 | API2:2023 — Broken Authentication | `/lab/broken-auth` | [docs](docs/security-labs/api2-broken-auth.md) |
 | 7 | API4:2023 — Unrestricted Resource Consumption | `/lab/resource-consumption` | [docs](docs/security-labs/api4-resource-consumption.md) |
+| 8 | API6:2023 — Unrestricted Access to Sensitive Business Flows | `/lab/bizflow` | [docs](docs/security-labs/api6-business-flows.md) |
+| 9 | API7:2023 — Server Side Request Forgery | `/lab/ssrf` | [docs](docs/security-labs/api7-ssrf.md) |
+| 10 | API8:2023 — Security Misconfiguration | `/lab/misconfig` | [docs](docs/security-labs/api8-misconfig.md) |
 
 Automated checks live in `tests/security-labs/`:
 
