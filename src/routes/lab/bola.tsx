@@ -91,7 +91,7 @@ function BolaLabPage() {
 
 function BolaLab() {
   const queryClient = useQueryClient();
-  const { data: account } = useAccount();
+  const { data: account } = useAccount(true);
   const [targetOrderId, setTargetOrderId] = useState<string>("");
   const [vulnerable, setVulnerable] = useState<RawResult | null>(null);
   const [secure, setSecure] = useState<RawResult | null>(null);
@@ -160,7 +160,7 @@ function BolaLab() {
   }
 
   const users = scenario.data.users;
-  const signedInEmail = account?.profile.email ?? "";
+  const signedInEmail = account?.email ?? "";
   const signedInLabUser = users.find((u) => u.email === signedInEmail);
   const target = users.find((u) => u.orderId === targetOrderId);
   const isCrossAccount = Boolean(target && signedInLabUser && target.userId !== signedInLabUser.userId);
@@ -230,7 +230,7 @@ function BolaLab() {
               <p className="font-medium">{signedInLabUser?.label ?? "Non-lab account"}</p>
               <p className="mt-1 break-all text-xs text-muted-foreground">{signedInEmail}</p>
               <p className="mt-2 break-all font-mono text-[11px] text-muted-foreground">
-                sub: {account?.profile.id ?? "—"}
+                sub: {account?.id ?? "—"}
               </p>
             </div>
             {!signedInLabUser && (
