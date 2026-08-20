@@ -187,7 +187,7 @@ export async function labBoplaVulnerableUpdate(
   const supabase = await admin();
   const { data, error } = await supabase
     .from("lab_bopla_profiles")
-    .update(patch)
+    .update(patch as never)
     .eq("user_id", userId)
     .select(SELECT)
     .single();
@@ -251,7 +251,7 @@ export async function labBoplaSecureUpdate(
   const supabase = await admin();
   const { data, error } = await supabase
     .from("lab_bopla_profiles")
-    .update(patch)
+    .update(patch as never)
     .eq("user_id", userId)
     .select(SELECT)
     .single();
