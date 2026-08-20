@@ -32,6 +32,7 @@ import { Route as ApiV1CartItemsItemIdRouteImport } from './routes/api/v1/cart/i
 import { Route as ApiV1LabBolaIndexRouteImport } from './routes/api/v1/lab/bola/index'
 import { Route as ApiV1OrdersIdIndexRouteImport } from './routes/api/v1/orders/$id/index'
 import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/$id/cancel'
+import { Route as ApiV1LabBolaOrdersIdAccessRouteImport } from './routes/api/v1/lab/bola/orders/$id/access'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -148,6 +149,12 @@ const ApiV1OrdersIdCancelRoute = ApiV1OrdersIdCancelRouteImport.update({
   path: '/api/v1/orders/$id/cancel',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1LabBolaOrdersIdAccessRoute =
+  ApiV1LabBolaOrdersIdAccessRouteImport.update({
+    id: '/api/v1/lab/bola/orders/$id/access',
+    path: '/api/v1/lab/bola/orders/$id/access',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -173,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
+  '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -198,6 +206,7 @@ export interface FileRoutesByTo {
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bola': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id': typeof ApiV1OrdersIdIndexRoute
+  '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -224,6 +233,7 @@ export interface FileRoutesById {
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
+  '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -251,6 +261,7 @@ export interface FileRouteTypes {
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
+    | '/api/v1/lab/bola/orders/$id/access'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -276,6 +287,7 @@ export interface FileRouteTypes {
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bola'
     | '/api/v1/orders/$id'
+    | '/api/v1/lab/bola/orders/$id/access'
   id:
     | '__root__'
     | '/'
@@ -301,6 +313,7 @@ export interface FileRouteTypes {
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
+    | '/api/v1/lab/bola/orders/$id/access'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -327,6 +340,7 @@ export interface RootRouteChildren {
   ApiV1OrdersIdCancelRoute: typeof ApiV1OrdersIdCancelRoute
   ApiV1LabBolaIndexRoute: typeof ApiV1LabBolaIndexRoute
   ApiV1OrdersIdIndexRoute: typeof ApiV1OrdersIdIndexRoute
+  ApiV1LabBolaOrdersIdAccessRoute: typeof ApiV1LabBolaOrdersIdAccessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -492,6 +506,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1OrdersIdCancelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/bola/orders/$id/access': {
+      id: '/api/v1/lab/bola/orders/$id/access'
+      path: '/api/v1/lab/bola/orders/$id/access'
+      fullPath: '/api/v1/lab/bola/orders/$id/access'
+      preLoaderRoute: typeof ApiV1LabBolaOrdersIdAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -519,6 +540,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1OrdersIdCancelRoute: ApiV1OrdersIdCancelRoute,
   ApiV1LabBolaIndexRoute: ApiV1LabBolaIndexRoute,
   ApiV1OrdersIdIndexRoute: ApiV1OrdersIdIndexRoute,
+  ApiV1LabBolaOrdersIdAccessRoute: ApiV1LabBolaOrdersIdAccessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
