@@ -232,6 +232,78 @@ export type Database = {
         }
         Relationships: []
       }
+      lab_rc_records: {
+        Row: {
+          amount_cents: number
+          created_at: string
+          customer_label: string
+          id: string
+          issued_on: string
+          reference: string
+          region: string
+          seq: number
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string
+          customer_label: string
+          id?: string
+          issued_on: string
+          reference: string
+          region: string
+          seq: number
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string
+          customer_label?: string
+          id?: string
+          issued_on?: string
+          reference?: string
+          region?: string
+          seq?: number
+        }
+        Relationships: []
+      }
+      lab_rc_usage: {
+        Row: {
+          budget_spent_cents: number
+          compute_units: number
+          id: string
+          notifications_sent: number
+          request_count: number
+          rows_returned: number
+          updated_at: string
+          user_id: string
+          variant: string
+          window_started_at: string
+        }
+        Insert: {
+          budget_spent_cents?: number
+          compute_units?: number
+          id?: string
+          notifications_sent?: number
+          request_count?: number
+          rows_returned?: number
+          updated_at?: string
+          user_id: string
+          variant: string
+          window_started_at?: string
+        }
+        Update: {
+          budget_spent_cents?: number
+          compute_units?: number
+          id?: string
+          notifications_sent?: number
+          request_count?: number
+          rows_returned?: number
+          updated_at?: string
+          user_id?: string
+          variant?: string
+          window_started_at?: string
+        }
+        Relationships: []
+      }
       order_items: {
         Row: {
           created_at: string
@@ -510,6 +582,7 @@ export type Database = {
       lab_bola_reset: { Args: never; Returns: Json }
       lab_bopla_reset: { Args: never; Returns: Json }
       lab_broken_auth_reset: { Args: never; Returns: Json }
+      lab_rc_reset: { Args: never; Returns: Json }
       place_order: {
         Args: { _address_id: string; _payment_method: string }
         Returns: Json
