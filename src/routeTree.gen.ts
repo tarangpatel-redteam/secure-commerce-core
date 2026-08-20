@@ -19,6 +19,7 @@ import { Route as ProductsSlugRouteImport } from './routes/products/$slug'
 import { Route as ApiV1CategoriesRouteImport } from './routes/api/v1/categories'
 import { Route as ApiV1MeRouteImport } from './routes/api/v1/me'
 import { Route as ApiV1AddressesIndexRouteImport } from './routes/api/v1/addresses/index'
+import { Route as ApiV1AddressesIdRouteImport } from './routes/api/v1/addresses/$id'
 import { Route as ApiV1CartIndexRouteImport } from './routes/api/v1/cart/index'
 import { Route as ApiV1ProductsIndexRouteImport } from './routes/api/v1/products/index'
 import { Route as ApiV1ProductsSlugRouteImport } from './routes/api/v1/products/$slug'
@@ -75,6 +76,11 @@ const ApiV1AddressesIndexRoute = ApiV1AddressesIndexRouteImport.update({
   path: '/api/v1/addresses/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1AddressesIdRoute = ApiV1AddressesIdRouteImport.update({
+  id: '/api/v1/addresses/$id',
+  path: '/api/v1/addresses/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiV1CartIndexRoute = ApiV1CartIndexRouteImport.update({
   id: '/api/v1/cart/',
   path: '/api/v1/cart/',
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/products/': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/addresses/$id': typeof ApiV1AddressesIdRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
   '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByTo {
   '/products': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/addresses/$id': typeof ApiV1AddressesIdRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
   '/api/v1/addresses': typeof ApiV1AddressesIndexRoute
@@ -146,6 +154,7 @@ export interface FileRoutesById {
   '/products/': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/addresses/$id': typeof ApiV1AddressesIdRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
   '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/products/'
     | '/api/v1/categories'
     | '/api/v1/me'
+    | '/api/v1/addresses/$id'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
     | '/api/v1/addresses/'
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
     | '/products'
     | '/api/v1/categories'
     | '/api/v1/me'
+    | '/api/v1/addresses/$id'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
     | '/api/v1/addresses'
@@ -199,6 +210,7 @@ export interface FileRouteTypes {
     | '/products/'
     | '/api/v1/categories'
     | '/api/v1/me'
+    | '/api/v1/addresses/$id'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
     | '/api/v1/addresses/'
@@ -217,6 +229,7 @@ export interface RootRouteChildren {
   ProductsIndexRoute: typeof ProductsIndexRoute
   ApiV1CategoriesRoute: typeof ApiV1CategoriesRoute
   ApiV1MeRoute: typeof ApiV1MeRoute
+  ApiV1AddressesIdRoute: typeof ApiV1AddressesIdRoute
   ApiV1ProductsSlugRoute: typeof ApiV1ProductsSlugRoute
   ApiV1StaffCustomersRoute: typeof ApiV1StaffCustomersRoute
   ApiV1AddressesIndexRoute: typeof ApiV1AddressesIndexRoute
@@ -297,6 +310,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1AddressesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/addresses/$id': {
+      id: '/api/v1/addresses/$id'
+      path: '/api/v1/addresses/$id'
+      fullPath: '/api/v1/addresses/$id'
+      preLoaderRoute: typeof ApiV1AddressesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/cart/': {
       id: '/api/v1/cart/'
       path: '/api/v1/cart'
@@ -345,6 +365,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsIndexRoute: ProductsIndexRoute,
   ApiV1CategoriesRoute: ApiV1CategoriesRoute,
   ApiV1MeRoute: ApiV1MeRoute,
+  ApiV1AddressesIdRoute: ApiV1AddressesIdRoute,
   ApiV1ProductsSlugRoute: ApiV1ProductsSlugRoute,
   ApiV1StaffCustomersRoute: ApiV1StaffCustomersRoute,
   ApiV1AddressesIndexRoute: ApiV1AddressesIndexRoute,
