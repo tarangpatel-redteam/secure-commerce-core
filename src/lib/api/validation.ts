@@ -129,3 +129,18 @@ export const labOtpSchema = z.object({
   username: z.string().trim().min(1, "Enter a username.").max(64),
   code: z.string().trim().regex(/^\d{4,8}$/, "Codes are 4-8 digits."),
 });
+
+/**
+ * Body schemas for the Unrestricted Resource Consumption lab (API4:2023).
+ * Both variants parse input identically — the intentional weakness is the
+ * absence of consumption CONTROLS (ceilings, rate limits, budgets), not the
+ * absence of parsing. Bounds here only keep the lab itself from being abused.
+ */
+export const labExportSchema = z.object({
+  limit: z.number().int().min(1).max(1_000_000).default(25),
+  workFactor: z.number().int().min(1).max(1_000).default(1),
+});
+
+export const labNotifySchema = z.object({
+  count: z.number().int().min(1).max(1_000).default(1),
+});
