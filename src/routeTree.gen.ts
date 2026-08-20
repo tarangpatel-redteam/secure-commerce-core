@@ -21,6 +21,7 @@ import { Route as ApiV1MeRouteImport } from './routes/api/v1/me'
 import { Route as ApiV1AddressesIndexRouteImport } from './routes/api/v1/addresses/index'
 import { Route as ApiV1AddressesIdRouteImport } from './routes/api/v1/addresses/$id'
 import { Route as ApiV1CartIndexRouteImport } from './routes/api/v1/cart/index'
+import { Route as ApiV1OrdersIndexRouteImport } from './routes/api/v1/orders/index'
 import { Route as ApiV1ProductsIndexRouteImport } from './routes/api/v1/products/index'
 import { Route as ApiV1ProductsSlugRouteImport } from './routes/api/v1/products/$slug'
 import { Route as ApiV1StaffCustomersRouteImport } from './routes/api/v1/staff/customers'
@@ -86,6 +87,11 @@ const ApiV1CartIndexRoute = ApiV1CartIndexRouteImport.update({
   path: '/api/v1/cart/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1OrdersIndexRoute = ApiV1OrdersIndexRouteImport.update({
+  id: '/api/v1/orders/',
+  path: '/api/v1/orders/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiV1ProductsIndexRoute = ApiV1ProductsIndexRouteImport.update({
   id: '/api/v1/products/',
   path: '/api/v1/products/',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
   '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart/': typeof ApiV1CartIndexRoute
+  '/api/v1/orders/': typeof ApiV1OrdersIndexRoute
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
 }
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
   '/api/v1/addresses': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart': typeof ApiV1CartIndexRoute
+  '/api/v1/orders': typeof ApiV1OrdersIndexRoute
   '/api/v1/products': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
 }
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
   '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart/': typeof ApiV1CartIndexRoute
+  '/api/v1/orders/': typeof ApiV1OrdersIndexRoute
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/api/v1/staff/customers'
     | '/api/v1/addresses/'
     | '/api/v1/cart/'
+    | '/api/v1/orders/'
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/api/v1/staff/customers'
     | '/api/v1/addresses'
     | '/api/v1/cart'
+    | '/api/v1/orders'
     | '/api/v1/products'
     | '/api/v1/cart/items/$itemId'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/api/v1/staff/customers'
     | '/api/v1/addresses/'
     | '/api/v1/cart/'
+    | '/api/v1/orders/'
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
   fileRoutesById: FileRoutesById
@@ -234,6 +246,7 @@ export interface RootRouteChildren {
   ApiV1StaffCustomersRoute: typeof ApiV1StaffCustomersRoute
   ApiV1AddressesIndexRoute: typeof ApiV1AddressesIndexRoute
   ApiV1CartIndexRoute: typeof ApiV1CartIndexRoute
+  ApiV1OrdersIndexRoute: typeof ApiV1OrdersIndexRoute
   ApiV1ProductsIndexRoute: typeof ApiV1ProductsIndexRoute
   ApiV1CartItemsItemIdRoute: typeof ApiV1CartItemsItemIdRoute
 }
@@ -324,6 +337,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1CartIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/orders/': {
+      id: '/api/v1/orders/'
+      path: '/api/v1/orders'
+      fullPath: '/api/v1/orders/'
+      preLoaderRoute: typeof ApiV1OrdersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/products/': {
       id: '/api/v1/products/'
       path: '/api/v1/products'
@@ -370,6 +390,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1StaffCustomersRoute: ApiV1StaffCustomersRoute,
   ApiV1AddressesIndexRoute: ApiV1AddressesIndexRoute,
   ApiV1CartIndexRoute: ApiV1CartIndexRoute,
+  ApiV1OrdersIndexRoute: ApiV1OrdersIndexRoute,
   ApiV1ProductsIndexRoute: ApiV1ProductsIndexRoute,
   ApiV1CartItemsItemIdRoute: ApiV1CartItemsItemIdRoute,
 }
