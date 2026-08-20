@@ -18,6 +18,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LabBflaRouteImport } from './routes/lab/bfla'
 import { Route as LabBolaRouteImport } from './routes/lab/bola'
 import { Route as LabBoplaRouteImport } from './routes/lab/bopla'
+import { Route as LabBrokenAuthRouteImport } from './routes/lab/broken-auth'
 import { Route as OrdersIndexRouteImport } from './routes/orders/index'
 import { Route as OrdersIdRouteImport } from './routes/orders/$id'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
@@ -92,6 +93,11 @@ const LabBolaRoute = LabBolaRouteImport.update({
 const LabBoplaRoute = LabBoplaRouteImport.update({
   id: '/lab/bopla',
   path: '/lab/bopla',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabBrokenAuthRoute = LabBrokenAuthRouteImport.update({
+  id: '/lab/broken-auth',
+  path: '/lab/broken-auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
@@ -263,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
+  '/lab/broken-auth': typeof LabBrokenAuthRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -304,6 +311,7 @@ export interface FileRoutesByTo {
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
+  '/lab/broken-auth': typeof LabBrokenAuthRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders': typeof OrdersIndexRoute
@@ -346,6 +354,7 @@ export interface FileRoutesById {
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
+  '/lab/broken-auth': typeof LabBrokenAuthRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -389,6 +398,7 @@ export interface FileRouteTypes {
     | '/lab/bfla'
     | '/lab/bola'
     | '/lab/bopla'
+    | '/lab/broken-auth'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -430,6 +440,7 @@ export interface FileRouteTypes {
     | '/lab/bfla'
     | '/lab/bola'
     | '/lab/bopla'
+    | '/lab/broken-auth'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders'
@@ -471,6 +482,7 @@ export interface FileRouteTypes {
     | '/lab/bfla'
     | '/lab/bola'
     | '/lab/bopla'
+    | '/lab/broken-auth'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -513,6 +525,7 @@ export interface RootRouteChildren {
   LabBflaRoute: typeof LabBflaRoute
   LabBolaRoute: typeof LabBolaRoute
   LabBoplaRoute: typeof LabBoplaRoute
+  LabBrokenAuthRoute: typeof LabBrokenAuthRoute
   OrdersIdRoute: typeof OrdersIdRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
@@ -608,6 +621,13 @@ declare module '@tanstack/react-router' {
       path: '/lab/bopla'
       fullPath: '/lab/bopla'
       preLoaderRoute: typeof LabBoplaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/broken-auth': {
+      id: '/lab/broken-auth'
+      path: '/lab/broken-auth'
+      fullPath: '/lab/broken-auth'
+      preLoaderRoute: typeof LabBrokenAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders/': {
@@ -833,6 +853,7 @@ const rootRouteChildren: RootRouteChildren = {
   LabBflaRoute: LabBflaRoute,
   LabBolaRoute: LabBolaRoute,
   LabBoplaRoute: LabBoplaRoute,
+  LabBrokenAuthRoute: LabBrokenAuthRoute,
   OrdersIdRoute: OrdersIdRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   OrdersIndexRoute: OrdersIndexRoute,
