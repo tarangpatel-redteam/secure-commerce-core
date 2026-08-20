@@ -104,3 +104,12 @@ export const loginSchema = z.object({
   email: z.string().trim().email("Enter a valid email address.").max(200),
   password: z.string().min(1, "Enter your password."),
 });
+
+/**
+ * Body schema for the BFLA training lab's privileged status-transition
+ * function. Only the target status is accepted; identity and role are always
+ * derived server-side from the verified session.
+ */
+export const labStatusSchema = z.object({
+  status: z.enum(["paid", "processing", "shipped", "delivered", "cancelled"]),
+});
