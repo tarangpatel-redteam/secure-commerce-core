@@ -400,12 +400,12 @@ function BrokenAuthLab() {
         </div>
         <h1 className="text-4xl">Broken Authentication</h1>
         <p className="max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          {data.description} The scenario is isolated to{" "}
-          <code className="rounded bg-muted px-1 py-0.5 text-xs">/api/v1/lab/broken-auth/*</code>{" "}
-          and the synthetic{" "}
-          <code className="rounded bg-muted px-1 py-0.5 text-xs">lab_auth_accounts</code> table.
-          Real ACME sign-in still uses the hardened production auth stack — you had to pass it to
-          reach this page.
+          {data.description}
+        </p>
+        <p className="max-w-3xl text-xs text-muted-foreground">
+          Isolated to <code className="rounded bg-muted px-1">/api/v1/lab/broken-auth/*</code> and
+          the synthetic <code className="rounded bg-muted px-1">lab_auth_accounts</code> table. Real
+          ACME sign-in keeps the hardened production auth stack.
         </p>
       </header>
 
@@ -422,4 +422,106 @@ function BrokenAuthLab() {
             {data.knownUsernames.join(", ")}
           </p>
           <p className="mt-3 text-xs text-muted-foreground">
-            {data.accountsSeeded} fictional accounts seeded. They grant no access to ACME
+            {data.accountsSeeded} fictional accounts seeded. They grant no access to ACME Commerce.
+          </p>
+        </article>
+        <article className="rounded-xl border border-border bg-card p-6">
+          <h2 className="text-lg">Secure policy</h2>
+          <p className="mt-2 text-xs text-muted-foreground">
+            {data.securePolicy.maxPasswordAttempts} password attempts, then a{" "}
+            {data.securePolicy.lockoutMinutes} minute lockout ·{" "}
+            {data.securePolicy.maxOtpAttempts} recovery attempts · generic errors ·{" "}
+            {data.securePolicy.tokenStrategy} tokens.
+          </p>
+        </article>
+      </section>
+
+      <section className="rounded-xl border border-border bg-card p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <h2 className="text-xl">Authentication attack simulator</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Identical requests are sent to both portals.
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => reset.mutate()}
+            disabled={reset.isPending}
+          >
+            <RotateCcw className="mr-2 size-4" />
+            {reset.isPending ? "Resetting…" : "Reset lab data"}
+          </Button>
+        </div>
+
+        <div className="mt-6 max-w-sm">
+          <label htmlFor="lab-username" className="text-xs uppercase text-muted-foreground">
+            Target username
+          </label>
+          <Input
+            id="lab-username"
+            className="mt-2"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button onClick={() => enumerate.mutate()} disabled={pending}>
+            <KeyRound className="mr-2 size-4" /> Probe user enumeration
+          </Button>
+          <Button variant="secondary" onClick={() => bruteForce.mutate()} disabled={pending}>
+            Run credential brute force
+          </Button>
+          <Button variant="secondary" onClick={() => otpAttack.mutate()} disabled={pending}>
+            Brute force recovery code
+          </Button>
+        </div>
+      </section>
+
+      <section className="grid gap-6 lg:grid-cols-2">
+        <ResultPanel
+          tone="vulnerable"
+          title="Vulnerable portal"
+          subtitle="/api/v1/lab/broken-auth/*"
+          summary={vulnSummary}
+          result={vulnerable}
+        />
+        <ResultPanel
+          tone="secure"
+          title="Hardened portal"
+          subtitle="/api/v1/lab/broken-auth/secure/*"
+          summary={secureSummary}
+          result={secure}
+        />
+      </section>
+
+      <section className="rounded-xl border border-border bg-card p-6">
+        <h2 className="text-xl">Remediation</h2>
+        <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+          <li>
+            Return one generic message for every failed sign-in so responses never reveal whether
+            an account exists.
+          </li>
+          <li>
+            Count failures server-side and enforce them: throttling, exponential backoff and a
+            temporary lockout after a small number of attempts.
+          </li>
+          <li>
+            Issue session and recovery tokens from a CSPRNG; never derive them from a counter,
+            username or timestamp.
+          </li>
+          <li>
+            Give recovery codes real entropy, a short expiry and a hard attempt cap, and compare
+            them in constant time.
+          </li>
+          <li>
+            Store credentials with a slow password hash and treat every authentication decision as
+            server-side state.
+          </li>
+        </ul>
+      </section>
+    </div>
+  );
+}
