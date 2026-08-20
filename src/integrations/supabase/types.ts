@@ -124,6 +124,60 @@ export type Database = {
         }
         Relationships: []
       }
+      lab_auth_accounts: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: string
+          locked_until: string | null
+          otp_code: string
+          otp_expires_at: string
+          password_hash: string
+          password_salt: string
+          secure_failed_attempts: number
+          secure_otp_attempts: number
+          session_counter: number
+          updated_at: string
+          username: string
+          vuln_failed_attempts: number
+          vuln_otp_attempts: number
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          id?: string
+          locked_until?: string | null
+          otp_code?: string
+          otp_expires_at?: string
+          password_hash: string
+          password_salt: string
+          secure_failed_attempts?: number
+          secure_otp_attempts?: number
+          session_counter?: number
+          updated_at?: string
+          username: string
+          vuln_failed_attempts?: number
+          vuln_otp_attempts?: number
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: string
+          locked_until?: string | null
+          otp_code?: string
+          otp_expires_at?: string
+          password_hash?: string
+          password_salt?: string
+          secure_failed_attempts?: number
+          secure_otp_attempts?: number
+          session_counter?: number
+          updated_at?: string
+          username?: string
+          vuln_failed_attempts?: number
+          vuln_otp_attempts?: number
+        }
+        Relationships: []
+      }
       lab_bopla_profiles: {
         Row: {
           account_credit_cents: number
@@ -455,6 +509,7 @@ export type Database = {
       lab_bfla_reset: { Args: never; Returns: Json }
       lab_bola_reset: { Args: never; Returns: Json }
       lab_bopla_reset: { Args: never; Returns: Json }
+      lab_broken_auth_reset: { Args: never; Returns: Json }
       place_order: {
         Args: { _address_id: string; _payment_method: string }
         Returns: Json

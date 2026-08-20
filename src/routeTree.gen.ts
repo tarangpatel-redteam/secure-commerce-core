@@ -18,6 +18,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LabBflaRouteImport } from './routes/lab/bfla'
 import { Route as LabBolaRouteImport } from './routes/lab/bola'
 import { Route as LabBoplaRouteImport } from './routes/lab/bopla'
+import { Route as LabBrokenAuthRouteImport } from './routes/lab/broken-auth'
 import { Route as OrdersIndexRouteImport } from './routes/orders/index'
 import { Route as OrdersIdRouteImport } from './routes/orders/$id'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
@@ -36,9 +37,14 @@ import { Route as ApiV1LabBflaIndexRouteImport } from './routes/api/v1/lab/bfla/
 import { Route as ApiV1LabBolaIndexRouteImport } from './routes/api/v1/lab/bola/index'
 import { Route as ApiV1LabBoplaIndexRouteImport } from './routes/api/v1/lab/bopla/index'
 import { Route as ApiV1LabBoplaProfileRouteImport } from './routes/api/v1/lab/bopla/profile'
+import { Route as ApiV1LabBrokenAuthIndexRouteImport } from './routes/api/v1/lab/broken-auth/index'
+import { Route as ApiV1LabBrokenAuthLoginRouteImport } from './routes/api/v1/lab/broken-auth/login'
+import { Route as ApiV1LabBrokenAuthRecoveryRouteImport } from './routes/api/v1/lab/broken-auth/recovery'
 import { Route as ApiV1OrdersIdIndexRouteImport } from './routes/api/v1/orders/$id/index'
 import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/$id/cancel'
 import { Route as ApiV1LabBoplaSecureProfileRouteImport } from './routes/api/v1/lab/bopla/secure/profile'
+import { Route as ApiV1LabBrokenAuthSecureLoginRouteImport } from './routes/api/v1/lab/broken-auth/secure/login'
+import { Route as ApiV1LabBrokenAuthSecureRecoveryRouteImport } from './routes/api/v1/lab/broken-auth/secure/recovery'
 import { Route as ApiV1LabBflaOrdersIdStatusRouteImport } from './routes/api/v1/lab/bfla/orders/$id/status'
 import { Route as ApiV1LabBolaOrdersIdAccessRouteImport } from './routes/api/v1/lab/bola/orders/$id/access'
 import { Route as ApiV1LabBflaSecureOrdersIdStatusRouteImport } from './routes/api/v1/lab/bfla/secure/orders/$id/status'
@@ -87,6 +93,11 @@ const LabBolaRoute = LabBolaRouteImport.update({
 const LabBoplaRoute = LabBoplaRouteImport.update({
   id: '/lab/bopla',
   path: '/lab/bopla',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabBrokenAuthRoute = LabBrokenAuthRouteImport.update({
+  id: '/lab/broken-auth',
+  path: '/lab/broken-auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
@@ -179,6 +190,22 @@ const ApiV1LabBoplaProfileRoute = ApiV1LabBoplaProfileRouteImport.update({
   path: '/api/v1/lab/bopla/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1LabBrokenAuthIndexRoute = ApiV1LabBrokenAuthIndexRouteImport.update({
+  id: '/api/v1/lab/broken-auth/',
+  path: '/api/v1/lab/broken-auth/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1LabBrokenAuthLoginRoute = ApiV1LabBrokenAuthLoginRouteImport.update({
+  id: '/api/v1/lab/broken-auth/login',
+  path: '/api/v1/lab/broken-auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1LabBrokenAuthRecoveryRoute =
+  ApiV1LabBrokenAuthRecoveryRouteImport.update({
+    id: '/api/v1/lab/broken-auth/recovery',
+    path: '/api/v1/lab/broken-auth/recovery',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiV1OrdersIdIndexRoute = ApiV1OrdersIdIndexRouteImport.update({
   id: '/api/v1/orders/$id/',
   path: '/api/v1/orders/$id/',
@@ -193,6 +220,18 @@ const ApiV1LabBoplaSecureProfileRoute =
   ApiV1LabBoplaSecureProfileRouteImport.update({
     id: '/api/v1/lab/bopla/secure/profile',
     path: '/api/v1/lab/bopla/secure/profile',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiV1LabBrokenAuthSecureLoginRoute =
+  ApiV1LabBrokenAuthSecureLoginRouteImport.update({
+    id: '/api/v1/lab/broken-auth/secure/login',
+    path: '/api/v1/lab/broken-auth/secure/login',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiV1LabBrokenAuthSecureRecoveryRoute =
+  ApiV1LabBrokenAuthSecureRecoveryRouteImport.update({
+    id: '/api/v1/lab/broken-auth/secure/recovery',
+    path: '/api/v1/lab/broken-auth/secure/recovery',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiV1LabBflaOrdersIdStatusRoute =
@@ -230,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
+  '/lab/broken-auth': typeof LabBrokenAuthRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -245,12 +285,17 @@ export interface FileRoutesByFullPath {
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/lab/bopla/profile': typeof ApiV1LabBoplaProfileRoute
+  '/api/v1/lab/broken-auth/login': typeof ApiV1LabBrokenAuthLoginRoute
+  '/api/v1/lab/broken-auth/recovery': typeof ApiV1LabBrokenAuthRecoveryRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bfla/': typeof ApiV1LabBflaIndexRoute
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/lab/bopla/': typeof ApiV1LabBoplaIndexRoute
+  '/api/v1/lab/broken-auth/': typeof ApiV1LabBrokenAuthIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bopla/secure/profile': typeof ApiV1LabBoplaSecureProfileRoute
+  '/api/v1/lab/broken-auth/secure/login': typeof ApiV1LabBrokenAuthSecureLoginRoute
+  '/api/v1/lab/broken-auth/secure/recovery': typeof ApiV1LabBrokenAuthSecureRecoveryRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
   '/api/v1/lab/bfla/secure/orders/$id/status': typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -266,6 +311,7 @@ export interface FileRoutesByTo {
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
+  '/lab/broken-auth': typeof LabBrokenAuthRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders': typeof OrdersIndexRoute
@@ -281,12 +327,17 @@ export interface FileRoutesByTo {
   '/api/v1/products': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/lab/bopla/profile': typeof ApiV1LabBoplaProfileRoute
+  '/api/v1/lab/broken-auth/login': typeof ApiV1LabBrokenAuthLoginRoute
+  '/api/v1/lab/broken-auth/recovery': typeof ApiV1LabBrokenAuthRecoveryRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bfla': typeof ApiV1LabBflaIndexRoute
   '/api/v1/lab/bola': typeof ApiV1LabBolaIndexRoute
   '/api/v1/lab/bopla': typeof ApiV1LabBoplaIndexRoute
+  '/api/v1/lab/broken-auth': typeof ApiV1LabBrokenAuthIndexRoute
   '/api/v1/orders/$id': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bopla/secure/profile': typeof ApiV1LabBoplaSecureProfileRoute
+  '/api/v1/lab/broken-auth/secure/login': typeof ApiV1LabBrokenAuthSecureLoginRoute
+  '/api/v1/lab/broken-auth/secure/recovery': typeof ApiV1LabBrokenAuthSecureRecoveryRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
   '/api/v1/lab/bfla/secure/orders/$id/status': typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -303,6 +354,7 @@ export interface FileRoutesById {
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
   '/lab/bopla': typeof LabBoplaRoute
+  '/lab/broken-auth': typeof LabBrokenAuthRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -318,12 +370,17 @@ export interface FileRoutesById {
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/lab/bopla/profile': typeof ApiV1LabBoplaProfileRoute
+  '/api/v1/lab/broken-auth/login': typeof ApiV1LabBrokenAuthLoginRoute
+  '/api/v1/lab/broken-auth/recovery': typeof ApiV1LabBrokenAuthRecoveryRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
   '/api/v1/lab/bfla/': typeof ApiV1LabBflaIndexRoute
   '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/lab/bopla/': typeof ApiV1LabBoplaIndexRoute
+  '/api/v1/lab/broken-auth/': typeof ApiV1LabBrokenAuthIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
   '/api/v1/lab/bopla/secure/profile': typeof ApiV1LabBoplaSecureProfileRoute
+  '/api/v1/lab/broken-auth/secure/login': typeof ApiV1LabBrokenAuthSecureLoginRoute
+  '/api/v1/lab/broken-auth/secure/recovery': typeof ApiV1LabBrokenAuthSecureRecoveryRoute
   '/api/v1/lab/bfla/orders/$id/status': typeof ApiV1LabBflaOrdersIdStatusRoute
   '/api/v1/lab/bola/orders/$id/access': typeof ApiV1LabBolaOrdersIdAccessRoute
   '/api/v1/lab/bfla/secure/orders/$id/status': typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -341,6 +398,7 @@ export interface FileRouteTypes {
     | '/lab/bfla'
     | '/lab/bola'
     | '/lab/bopla'
+    | '/lab/broken-auth'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -356,12 +414,17 @@ export interface FileRouteTypes {
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/lab/bopla/profile'
+    | '/api/v1/lab/broken-auth/login'
+    | '/api/v1/lab/broken-auth/recovery'
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bfla/'
     | '/api/v1/lab/bola/'
     | '/api/v1/lab/bopla/'
+    | '/api/v1/lab/broken-auth/'
     | '/api/v1/orders/$id/'
     | '/api/v1/lab/bopla/secure/profile'
+    | '/api/v1/lab/broken-auth/secure/login'
+    | '/api/v1/lab/broken-auth/secure/recovery'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
     | '/api/v1/lab/bfla/secure/orders/$id/status'
@@ -377,6 +440,7 @@ export interface FileRouteTypes {
     | '/lab/bfla'
     | '/lab/bola'
     | '/lab/bopla'
+    | '/lab/broken-auth'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders'
@@ -392,12 +456,17 @@ export interface FileRouteTypes {
     | '/api/v1/products'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/lab/bopla/profile'
+    | '/api/v1/lab/broken-auth/login'
+    | '/api/v1/lab/broken-auth/recovery'
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bfla'
     | '/api/v1/lab/bola'
     | '/api/v1/lab/bopla'
+    | '/api/v1/lab/broken-auth'
     | '/api/v1/orders/$id'
     | '/api/v1/lab/bopla/secure/profile'
+    | '/api/v1/lab/broken-auth/secure/login'
+    | '/api/v1/lab/broken-auth/secure/recovery'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
     | '/api/v1/lab/bfla/secure/orders/$id/status'
@@ -413,6 +482,7 @@ export interface FileRouteTypes {
     | '/lab/bfla'
     | '/lab/bola'
     | '/lab/bopla'
+    | '/lab/broken-auth'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -428,12 +498,17 @@ export interface FileRouteTypes {
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/lab/bopla/profile'
+    | '/api/v1/lab/broken-auth/login'
+    | '/api/v1/lab/broken-auth/recovery'
     | '/api/v1/orders/$id/cancel'
     | '/api/v1/lab/bfla/'
     | '/api/v1/lab/bola/'
     | '/api/v1/lab/bopla/'
+    | '/api/v1/lab/broken-auth/'
     | '/api/v1/orders/$id/'
     | '/api/v1/lab/bopla/secure/profile'
+    | '/api/v1/lab/broken-auth/secure/login'
+    | '/api/v1/lab/broken-auth/secure/recovery'
     | '/api/v1/lab/bfla/orders/$id/status'
     | '/api/v1/lab/bola/orders/$id/access'
     | '/api/v1/lab/bfla/secure/orders/$id/status'
@@ -450,6 +525,7 @@ export interface RootRouteChildren {
   LabBflaRoute: typeof LabBflaRoute
   LabBolaRoute: typeof LabBolaRoute
   LabBoplaRoute: typeof LabBoplaRoute
+  LabBrokenAuthRoute: typeof LabBrokenAuthRoute
   OrdersIdRoute: typeof OrdersIdRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
@@ -465,12 +541,17 @@ export interface RootRouteChildren {
   ApiV1ProductsIndexRoute: typeof ApiV1ProductsIndexRoute
   ApiV1CartItemsItemIdRoute: typeof ApiV1CartItemsItemIdRoute
   ApiV1LabBoplaProfileRoute: typeof ApiV1LabBoplaProfileRoute
+  ApiV1LabBrokenAuthLoginRoute: typeof ApiV1LabBrokenAuthLoginRoute
+  ApiV1LabBrokenAuthRecoveryRoute: typeof ApiV1LabBrokenAuthRecoveryRoute
   ApiV1OrdersIdCancelRoute: typeof ApiV1OrdersIdCancelRoute
   ApiV1LabBflaIndexRoute: typeof ApiV1LabBflaIndexRoute
   ApiV1LabBolaIndexRoute: typeof ApiV1LabBolaIndexRoute
   ApiV1LabBoplaIndexRoute: typeof ApiV1LabBoplaIndexRoute
+  ApiV1LabBrokenAuthIndexRoute: typeof ApiV1LabBrokenAuthIndexRoute
   ApiV1OrdersIdIndexRoute: typeof ApiV1OrdersIdIndexRoute
   ApiV1LabBoplaSecureProfileRoute: typeof ApiV1LabBoplaSecureProfileRoute
+  ApiV1LabBrokenAuthSecureLoginRoute: typeof ApiV1LabBrokenAuthSecureLoginRoute
+  ApiV1LabBrokenAuthSecureRecoveryRoute: typeof ApiV1LabBrokenAuthSecureRecoveryRoute
   ApiV1LabBflaOrdersIdStatusRoute: typeof ApiV1LabBflaOrdersIdStatusRoute
   ApiV1LabBolaOrdersIdAccessRoute: typeof ApiV1LabBolaOrdersIdAccessRoute
   ApiV1LabBflaSecureOrdersIdStatusRoute: typeof ApiV1LabBflaSecureOrdersIdStatusRoute
@@ -540,6 +621,13 @@ declare module '@tanstack/react-router' {
       path: '/lab/bopla'
       fullPath: '/lab/bopla'
       preLoaderRoute: typeof LabBoplaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/broken-auth': {
+      id: '/lab/broken-auth'
+      path: '/lab/broken-auth'
+      fullPath: '/lab/broken-auth'
+      preLoaderRoute: typeof LabBrokenAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders/': {
@@ -668,6 +756,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1LabBoplaProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/broken-auth/': {
+      id: '/api/v1/lab/broken-auth/'
+      path: '/api/v1/lab/broken-auth'
+      fullPath: '/api/v1/lab/broken-auth/'
+      preLoaderRoute: typeof ApiV1LabBrokenAuthIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/lab/broken-auth/login': {
+      id: '/api/v1/lab/broken-auth/login'
+      path: '/api/v1/lab/broken-auth/login'
+      fullPath: '/api/v1/lab/broken-auth/login'
+      preLoaderRoute: typeof ApiV1LabBrokenAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/lab/broken-auth/recovery': {
+      id: '/api/v1/lab/broken-auth/recovery'
+      path: '/api/v1/lab/broken-auth/recovery'
+      fullPath: '/api/v1/lab/broken-auth/recovery'
+      preLoaderRoute: typeof ApiV1LabBrokenAuthRecoveryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/orders/$id/': {
       id: '/api/v1/orders/$id/'
       path: '/api/v1/orders/$id'
@@ -687,6 +796,20 @@ declare module '@tanstack/react-router' {
       path: '/api/v1/lab/bopla/secure/profile'
       fullPath: '/api/v1/lab/bopla/secure/profile'
       preLoaderRoute: typeof ApiV1LabBoplaSecureProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/lab/broken-auth/secure/login': {
+      id: '/api/v1/lab/broken-auth/secure/login'
+      path: '/api/v1/lab/broken-auth/secure/login'
+      fullPath: '/api/v1/lab/broken-auth/secure/login'
+      preLoaderRoute: typeof ApiV1LabBrokenAuthSecureLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/lab/broken-auth/secure/recovery': {
+      id: '/api/v1/lab/broken-auth/secure/recovery'
+      path: '/api/v1/lab/broken-auth/secure/recovery'
+      fullPath: '/api/v1/lab/broken-auth/secure/recovery'
+      preLoaderRoute: typeof ApiV1LabBrokenAuthSecureRecoveryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/v1/lab/bfla/orders/$id/status': {
@@ -730,6 +853,7 @@ const rootRouteChildren: RootRouteChildren = {
   LabBflaRoute: LabBflaRoute,
   LabBolaRoute: LabBolaRoute,
   LabBoplaRoute: LabBoplaRoute,
+  LabBrokenAuthRoute: LabBrokenAuthRoute,
   OrdersIdRoute: OrdersIdRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   OrdersIndexRoute: OrdersIndexRoute,
@@ -745,12 +869,17 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1ProductsIndexRoute: ApiV1ProductsIndexRoute,
   ApiV1CartItemsItemIdRoute: ApiV1CartItemsItemIdRoute,
   ApiV1LabBoplaProfileRoute: ApiV1LabBoplaProfileRoute,
+  ApiV1LabBrokenAuthLoginRoute: ApiV1LabBrokenAuthLoginRoute,
+  ApiV1LabBrokenAuthRecoveryRoute: ApiV1LabBrokenAuthRecoveryRoute,
   ApiV1OrdersIdCancelRoute: ApiV1OrdersIdCancelRoute,
   ApiV1LabBflaIndexRoute: ApiV1LabBflaIndexRoute,
   ApiV1LabBolaIndexRoute: ApiV1LabBolaIndexRoute,
   ApiV1LabBoplaIndexRoute: ApiV1LabBoplaIndexRoute,
+  ApiV1LabBrokenAuthIndexRoute: ApiV1LabBrokenAuthIndexRoute,
   ApiV1OrdersIdIndexRoute: ApiV1OrdersIdIndexRoute,
   ApiV1LabBoplaSecureProfileRoute: ApiV1LabBoplaSecureProfileRoute,
+  ApiV1LabBrokenAuthSecureLoginRoute: ApiV1LabBrokenAuthSecureLoginRoute,
+  ApiV1LabBrokenAuthSecureRecoveryRoute: ApiV1LabBrokenAuthSecureRecoveryRoute,
   ApiV1LabBflaOrdersIdStatusRoute: ApiV1LabBflaOrdersIdStatusRoute,
   ApiV1LabBolaOrdersIdAccessRoute: ApiV1LabBolaOrdersIdAccessRoute,
   ApiV1LabBflaSecureOrdersIdStatusRoute: ApiV1LabBflaSecureOrdersIdStatusRoute,

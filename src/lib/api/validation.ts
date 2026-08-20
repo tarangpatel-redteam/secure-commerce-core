@@ -113,3 +113,19 @@ export const loginSchema = z.object({
 export const labStatusSchema = z.object({
   status: z.enum(["paid", "processing", "shipped", "delivered", "cancelled"]),
 });
+
+/**
+ * Body schemas for the Broken Authentication training lab (API2:2023).
+ * The synthetic portal accepts a username + password, or a numeric recovery
+ * code. Input is validated identically on the vulnerable and secure variants —
+ * the intentional weakness is in the authentication logic, not in parsing.
+ */
+export const labCredentialsSchema = z.object({
+  username: z.string().trim().min(1, "Enter a username.").max(64),
+  password: z.string().min(1, "Enter a password.").max(200),
+});
+
+export const labOtpSchema = z.object({
+  username: z.string().trim().min(1, "Enter a username.").max(64),
+  code: z.string().trim().regex(/^\d{4,8}$/, "Codes are 4-8 digits."),
+});
