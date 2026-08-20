@@ -27,3 +27,21 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+## Security labs
+
+Isolated, synthetic training scenarios. Vulnerable behaviour is scoped to
+`/api/v1/lab/*` only; production `/api/v1` endpoints stay secure.
+
+| Phase | Scenario | Route | Docs |
+| --- | --- | --- | --- |
+| 3 | API1:2023 — Broken Object Level Authorization | `/lab/bola` | [docs](docs/security-labs/api1-bola.md) |
+| 4 | API5:2023 — Broken Function Level Authorization | `/lab/bfla` | [docs](docs/security-labs/api5-bfla.md) |
+
+Automated checks live in `tests/security-labs/`:
+
+```sh
+set -a && . ./.env && set +a
+python3 tests/security-labs/api1_bola_test.py
+python3 tests/security-labs/api5_bfla_test.py
+```
