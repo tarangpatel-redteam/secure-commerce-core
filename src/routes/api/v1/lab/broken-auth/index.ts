@@ -16,7 +16,7 @@ export const Route = createFileRoute("/api/v1/lab/broken-auth/")({
         const caller = await resolveCaller(request);
         if (!caller) return jsonError("unauthorized", "Sign in to load the lab scenario.");
         try {
-          return jsonOk(await labAuthScenario(caller));
+          return jsonOk(await labAuthScenario({ userId: caller.userId, email: caller.email, roles: caller.roles }));
         } catch (error) {
           console.error("[api/v1/lab/broken-auth GET]", error);
           return jsonError("server_error", "Unable to load the lab scenario.");
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/api/v1/lab/broken-auth/")({
         if (!caller) return jsonError("unauthorized", "Sign in to reset the lab scenario.");
         try {
           await labAuthReset();
-          return jsonOk(await labAuthScenario(caller));
+          return jsonOk(await labAuthScenario({ userId: caller.userId, email: caller.email, roles: caller.roles }));
         } catch (error) {
           console.error("[api/v1/lab/broken-auth POST]", error);
           return jsonError("server_error", "Unable to reset the lab scenario.");
