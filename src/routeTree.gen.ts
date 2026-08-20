@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiPublicSeedTestAccountsRouteImport } from './routes/api/public/seed-test-accounts'
 import { Route as ApiV1CategoriesRouteImport } from './routes/api/v1/categories'
 import { Route as ApiV1MeRouteImport } from './routes/api/v1/me'
 import { Route as ApiV1CartIndexRouteImport } from './routes/api/v1/cart/index'
@@ -24,12 +23,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicSeedTestAccountsRoute =
-  ApiPublicSeedTestAccountsRouteImport.update({
-    id: '/api/public/seed-test-accounts',
-    path: '/api/public/seed-test-accounts',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ApiV1CategoriesRoute = ApiV1CategoriesRouteImport.update({
   id: '/api/v1/categories',
   path: '/api/v1/categories',
@@ -68,7 +61,6 @@ const ApiV1CartItemsItemIdRoute = ApiV1CartItemsItemIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/api/public/seed-test-accounts': typeof ApiPublicSeedTestAccountsRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
@@ -79,7 +71,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/api/public/seed-test-accounts': typeof ApiPublicSeedTestAccountsRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
@@ -91,7 +82,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/api/public/seed-test-accounts': typeof ApiPublicSeedTestAccountsRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
@@ -104,7 +94,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/api/public/seed-test-accounts'
     | '/api/v1/categories'
     | '/api/v1/me'
     | '/api/v1/products/$slug'
@@ -115,7 +104,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/api/public/seed-test-accounts'
     | '/api/v1/categories'
     | '/api/v1/me'
     | '/api/v1/products/$slug'
@@ -126,7 +114,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/api/public/seed-test-accounts'
     | '/api/v1/categories'
     | '/api/v1/me'
     | '/api/v1/products/$slug'
@@ -138,7 +125,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ApiPublicSeedTestAccountsRoute: typeof ApiPublicSeedTestAccountsRoute
   ApiV1CategoriesRoute: typeof ApiV1CategoriesRoute
   ApiV1MeRoute: typeof ApiV1MeRoute
   ApiV1ProductsSlugRoute: typeof ApiV1ProductsSlugRoute
@@ -155,13 +141,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/seed-test-accounts': {
-      id: '/api/public/seed-test-accounts'
-      path: '/api/public/seed-test-accounts'
-      fullPath: '/api/public/seed-test-accounts'
-      preLoaderRoute: typeof ApiPublicSeedTestAccountsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/v1/categories': {
@@ -218,7 +197,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ApiPublicSeedTestAccountsRoute: ApiPublicSeedTestAccountsRoute,
   ApiV1CategoriesRoute: ApiV1CategoriesRoute,
   ApiV1MeRoute: ApiV1MeRoute,
   ApiV1ProductsSlugRoute: ApiV1ProductsSlugRoute,
