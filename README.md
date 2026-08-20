@@ -39,6 +39,7 @@ Isolated, synthetic training scenarios. Vulnerable behaviour is scoped to
 | 4 | API5:2023 — Broken Function Level Authorization | `/lab/bfla` | [docs](docs/security-labs/api5-bfla.md) |
 | 5 | API3:2023 — Broken Object Property Level Authorization | `/lab/bopla` | [docs](docs/security-labs/api3-bopla.md) |
 | 6 | API2:2023 — Broken Authentication | `/lab/broken-auth` | [docs](docs/security-labs/api2-broken-auth.md) |
+| 7 | API4:2023 — Unrestricted Resource Consumption | `/lab/resource-consumption` | [docs](docs/security-labs/api4-resource-consumption.md) |
 
 Automated checks live in `tests/security-labs/`:
 
@@ -48,4 +49,5 @@ python3 tests/security-labs/api1_bola_test.py
 python3 tests/security-labs/api5_bfla_test.py
 python3 tests/security-labs/api3_bopla_test.py
 python3 tests/security-labs/api2_broken_auth_test.py
+python3 tests/security-labs/api4_resource_consumption_test.py
 ```
