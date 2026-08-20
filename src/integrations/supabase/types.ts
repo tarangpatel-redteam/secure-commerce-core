@@ -178,6 +178,54 @@ export type Database = {
         }
         Relationships: []
       }
+      lab_bizflow_purchases: {
+        Row: {
+          client_signature: string
+          created_at: string
+          id: string
+          quantity: number
+          user_id: string
+          variant: string
+        }
+        Insert: {
+          client_signature?: string
+          created_at?: string
+          id?: string
+          quantity: number
+          user_id: string
+          variant: string
+        }
+        Update: {
+          client_signature?: string
+          created_at?: string
+          id?: string
+          quantity?: number
+          user_id?: string
+          variant?: string
+        }
+        Relationships: []
+      }
+      lab_bizflow_stock: {
+        Row: {
+          remaining: number
+          sku: string
+          updated_at: string
+          variant: string
+        }
+        Insert: {
+          remaining?: number
+          sku?: string
+          updated_at?: string
+          variant: string
+        }
+        Update: {
+          remaining?: number
+          sku?: string
+          updated_at?: string
+          variant?: string
+        }
+        Relationships: []
+      }
       lab_bopla_profiles: {
         Row: {
           account_credit_cents: number
@@ -579,6 +627,7 @@ export type Database = {
       is_catalog_manager: { Args: { _user_id: string }; Returns: boolean }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
       lab_bfla_reset: { Args: never; Returns: Json }
+      lab_bizflow_reset: { Args: never; Returns: Json }
       lab_bola_reset: { Args: never; Returns: Json }
       lab_bopla_reset: { Args: never; Returns: Json }
       lab_broken_auth_reset: { Args: never; Returns: Json }

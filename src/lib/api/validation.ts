@@ -144,3 +144,18 @@ export const labExportSchema = z.object({
 export const labNotifySchema = z.object({
   count: z.number().int().min(1).max(1_000).default(1),
 });
+
+/** Body schema for the sensitive business flow lab (API6:2023). */
+export const labBuySchema = z.object({
+  quantity: z.number().int().min(1).max(1_000).default(1),
+});
+
+/** Body schema for the SSRF lab (API7:2023). */
+export const labImportSchema = z.object({
+  url: z.string().trim().min(1, "Enter a URL.").max(2048),
+});
+
+/** Body schema for the security misconfiguration lab (API8:2023). */
+export const labProbeSchema = z.object({
+  probe: z.enum(["diagnostics", "error", "headers"]).default("diagnostics"),
+});
