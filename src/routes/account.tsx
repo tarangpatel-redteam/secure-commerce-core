@@ -203,6 +203,134 @@ function AccountDetails() {
           </div>
         </aside>
       </div>
+
+      <AddressBook />
     </div>
   );
 }
+
+function AddressBook() {
+  const { data: addresses, isLoading, isError } = useAddresses(true);
+  const saveAddress = useSaveAddress();
+  const deleteAddress = useDeleteAddress();
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [creating, setCreating] = useState(false);
+
+  const editing = addresses?.find((address) => address.id === editingId);
+
+  return (
+    <section className="mt-12 rounded-xl border border-border bg-card p-7 shadow-card">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 className="text-lg">Delivery addresses</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Saved addresses are private to your account and used at checkout.
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <Link to="/orders">View orders</Link>
+          </Button>
+          <Button
+            onClick={() => {
+              setEditingId(null);
+              setCreating((open) => !open);
+            }}
+          >
+            {creating ? "Close" : "Add address"}
+          </Button>
+        </div>
+      </div>
+
+      <Separator className="my-6" />
+
+      {creating ? (
+        <div className="mb-6 rounded-lg border border-border bg-surface p-5">
+          <AddressForm
+            submitting={saveAddress.isPending}
+            onCancel={() => setCreating(false)}
+            onSubmit={(values) =>
+              saveAddress.mutate({ values }, { onSuccess: () => setCreating(false) })
+            }
+          />
+        </div>
+      ) : null}
+
+      {isLoading ? <Skeleton className="h-28 w-full rounded-lg" /> : null}
+
+      {isError ? (
+        <p className="text-sm text-destructive">We couldn't load your addresses.</p>
+      ) : null}
+
+      {!isLoading && !isError && (addresses ?? []).length === 0 && !creating ? (
+        <p className="rounded-lg border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
+          No addresses saved yet.
+        </p>
+      ) : null}
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {(addresses ?? []).map((address) => (
+          <div key={address.id} className="rounded-lg border border-border p-5">
+            {editingId === address.id && editing ? (
+              <AddressForm
+                address={editing}
+                submitting={saveAddress.isPending}
+                onCancel={() => setEditingId(null)}
+                onSubmit={(values) =>
+                  saveAddress.mutate(
+                    { id: address.id, values },
+                    { onSuccess: () => setEditingId(null) },
+                  )
+                }
+              />
+            ) : (
+              <>
+                <div className="flex items-center gap-2">
+                  <p className="font-semibold">{address.label}</p>
+                  {address.isDefault ? <Badge variant="secondary">Default</Badge> : null}
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {address.recipientName}
+                  <br />
+                  {address.line1}
+                  {address.line2 ? (
+                    <>
+                      <br />
+                      {address.line2}
+                    </>
+                  ) : null}
+                  <br />
+                  {address.city}
+                  {address.state ? `, ${address.state}` : ""} {address.postalCode}
+                  <br />
+                  {address.country}
+                </p>
+                <div className="mt-4 flex gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      setCreating(false);
+                      setEditingId(address.id);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    disabled={deleteAddress.isPending}
+                    onClick={() => deleteAddress.mutate(address.id)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
