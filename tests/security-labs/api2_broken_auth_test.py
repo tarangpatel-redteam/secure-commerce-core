@@ -69,3 +69,26 @@ check("anonymous metadata denied", s == 401, s)
 for p in (f"{V}/login", f"{S}/login", f"{V}/recovery", f"{S}/recovery"):
     s, _ = req(f"{BASE}{p}", "POST", {"username": USER, "password": "x", "code": "0000"})
     check(f"anonymous {p} denied", s == 401, s)
+
+# --- input validation ------------------------------------------------------
+s, _ = req(f"{BASE}{V}/login", "POST", {"username": ""}, auth(T))
+check("vulnerable login validates input", s == 400, s)
+s, _ = req(f"{BASE}{S}/login", "POST", {"username": ""}, auth(T))
+check("secure login validates input", s == 400, s)
+s, _ = req(f"{BASE}{V}/recovery", "POST", {"username": USER, "code": "abcd"}, auth(T))
+check("recovery rejects non-numeric codes", s == 400, s)
+
+# --- user enumeration ------------------------------------------------------
+s, vk = req(f"{BASE}{V}/login", "POST", {"username": USER, "password": "nope"}, auth(T))
+s2, vu = req(f"{BASE}{V}/login", "POST", {"username": "ghost.user", "password": "nope"}, auth(T))
+check("vulnerable login responds 200 for both", s == 200 and s2 == 200, (s, s2))
+check("vulnerable reveals unknown username", vu["data"]["reason"] == "unknown_user", vu["data"]["reason"])
+check("vulnerable messages differ", vk["data"]["message"] != vu["data"]["message"])
+check("vulnerable flags enumeration", vk["data"]["userEnumerationPossible"] is True)
+
+_, sk = req(f"{BASE}{S}/login", "POST", {"username": USER, "password": "nope"}, auth(T))
+_, su = req(f"{BASE}{S}/login", "POST", {"username": "ghost.user", "password": "nope"}, auth(T))
+check("secure uses one generic message", sk["data"]["message"] == su["data"]["message"], sk["data"]["message"])
+check("secure uses one generic reason",
+      sk["data"]["reason"] == su["data"]["reason"] == "invalid_credentials")
+check("secure reports enumeration blocked", sk["data"]["userEnumerationPossible"] is False)
