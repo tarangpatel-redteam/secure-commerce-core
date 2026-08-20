@@ -33,7 +33,48 @@ export const updateCartItemSchema = z.object({
   quantity: z.number().int().min(0).max(99),
 });
 
+const optionalText = (max: number) => z.string().trim().max(max).optional().or(z.literal(""));
+
+export const addressSchema = z.object({
+  label: z.string().trim().min(1, "Add a short label.").max(40),
+  recipientName: z.string().trim().min(1, "Who should receive this?").max(120),
+  line1: z.string().trim().min(1, "Street address is required.").max(160),
+  line2: optionalText(160),
+  city: z.string().trim().min(1, "City is required.").max(80),
+  state: optionalText(80),
+  postalCode: z
+    .string()
+    .trim()
+    .min(2, "Postal code is required.")
+    .max(16)
+    .regex(/^[A-Za-z0-9][A-Za-z0-9 -]*$/, "Enter a valid postal code."),
+  country: z
+    .string()
+    .trim()
+    .length(2, "Use a two-letter country code.")
+    .regex(/^[A-Za-z]{2}$/, "Use a two-letter country code.")
+    .transform((value) => value.toUpperCase()),
+  phone: z
+    .string()
+    .trim()
+    .max(32)
+    .regex(/^[+()\-.\s0-9]*$/, "Phone numbers may only contain digits and + ( ) - .")
+    .optional()
+    .or(z.literal("")),
+  isDefault: z.boolean().default(false),
+});
+
+/**
+ * Checkout only accepts an address id and a mock payment method. Prices,
+ * totals and product names are never accepted from the client.
+ */
+export const checkoutSchema = z.object({
+  addressId: z.string().uuid("Select a delivery address."),
+  paymentMethod: z.enum(["test_success", "test_decline"]),
+});
+
 export const profileUpdateSchema = z.object({
+
   fullName: z.string().trim().min(1, "Please enter your name.").max(120),
   phone: z
     .string()
