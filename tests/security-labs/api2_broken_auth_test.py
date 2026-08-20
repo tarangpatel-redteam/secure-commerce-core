@@ -92,3 +92,24 @@ check("secure uses one generic message", sk["data"]["message"] == su["data"]["me
 check("secure uses one generic reason",
       sk["data"]["reason"] == su["data"]["reason"] == "invalid_credentials")
 check("secure reports enumeration blocked", sk["data"]["userEnumerationPossible"] is False)
+
+# --- brute force -----------------------------------------------------------
+req(f"{BASE}{V}", "POST", None, auth(T))  # deterministic starting point
+
+vuln_locked = False
+for i in range(12):
+    _, r = req(f"{BASE}{V}/login", "POST", {"username": USER, "password": f"guess{i}"}, auth(T))
+    if r["data"]["reason"] == "account_locked":
+        vuln_locked = True
+check("vulnerable endpoint never locks out", vuln_locked is False)
+check("vulnerable counts failures without enforcing", r["data"]["failedAttempts"] >= 12,
+      r["data"]["failedAttempts"])
+
+s, cracked = req(f"{BASE}{V}/login", "POST", {"username": USER, "password": REAL_PW}, auth(T))
+check("vulnerable password brute force succeeds", cracked["data"]["authenticated"] is True)
+tok1 = cracked["data"]["sessionToken"]
+_, again = req(f"{BASE}{V}/login", "POST", {"username": USER, "password": REAL_PW}, auth(T))
+tok2 = again["data"]["sessionToken"]
+check("vulnerable token is sequential/predictable",
+      tok1.startswith(f"lab-{USER}-") and int(tok2.split("-")[-1]) == int(tok1.split("-")[-1]) + 1,
+      (tok1, tok2))
