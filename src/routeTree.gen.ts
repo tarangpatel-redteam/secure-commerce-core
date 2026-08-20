@@ -29,6 +29,7 @@ import { Route as ApiV1ProductsIndexRouteImport } from './routes/api/v1/products
 import { Route as ApiV1ProductsSlugRouteImport } from './routes/api/v1/products/$slug'
 import { Route as ApiV1StaffCustomersRouteImport } from './routes/api/v1/staff/customers'
 import { Route as ApiV1CartItemsItemIdRouteImport } from './routes/api/v1/cart/items/$itemId'
+import { Route as ApiV1LabBolaIndexRouteImport } from './routes/api/v1/lab/bola/index'
 import { Route as ApiV1OrdersIdIndexRouteImport } from './routes/api/v1/orders/$id/index'
 import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/$id/cancel'
 
@@ -132,6 +133,11 @@ const ApiV1CartItemsItemIdRoute = ApiV1CartItemsItemIdRouteImport.update({
   path: '/api/v1/cart/items/$itemId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1LabBolaIndexRoute = ApiV1LabBolaIndexRouteImport.update({
+  id: '/api/v1/lab/bola/',
+  path: '/api/v1/lab/bola/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiV1OrdersIdIndexRoute = ApiV1OrdersIdIndexRouteImport.update({
   id: '/api/v1/orders/$id/',
   path: '/api/v1/orders/$id/',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/api/v1/products': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/lab/bola': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id': typeof ApiV1OrdersIdIndexRoute
 }
 export interface FileRoutesById {
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
   '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/lab/bola/': typeof ApiV1LabBolaIndexRoute
   '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/orders/$id/cancel'
+    | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/api/v1/products'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/orders/$id/cancel'
+    | '/api/v1/lab/bola'
     | '/api/v1/orders/$id'
   id:
     | '__root__'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
     | '/api/v1/orders/$id/cancel'
+    | '/api/v1/lab/bola/'
     | '/api/v1/orders/$id/'
   fileRoutesById: FileRoutesById
 }
@@ -313,6 +325,7 @@ export interface RootRouteChildren {
   ApiV1ProductsIndexRoute: typeof ApiV1ProductsIndexRoute
   ApiV1CartItemsItemIdRoute: typeof ApiV1CartItemsItemIdRoute
   ApiV1OrdersIdCancelRoute: typeof ApiV1OrdersIdCancelRoute
+  ApiV1LabBolaIndexRoute: typeof ApiV1LabBolaIndexRoute
   ApiV1OrdersIdIndexRoute: typeof ApiV1OrdersIdIndexRoute
 }
 
@@ -458,6 +471,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1CartItemsItemIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/lab/bola/': {
+      id: '/api/v1/lab/bola/'
+      path: '/api/v1/lab/bola'
+      fullPath: '/api/v1/lab/bola/'
+      preLoaderRoute: typeof ApiV1LabBolaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/orders/$id/': {
       id: '/api/v1/orders/$id/'
       path: '/api/v1/orders/$id'
@@ -497,6 +517,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1ProductsIndexRoute: ApiV1ProductsIndexRoute,
   ApiV1CartItemsItemIdRoute: ApiV1CartItemsItemIdRoute,
   ApiV1OrdersIdCancelRoute: ApiV1OrdersIdCancelRoute,
+  ApiV1LabBolaIndexRoute: ApiV1LabBolaIndexRoute,
   ApiV1OrdersIdIndexRoute: ApiV1OrdersIdIndexRoute,
 }
 export const routeTree = rootRouteImport
