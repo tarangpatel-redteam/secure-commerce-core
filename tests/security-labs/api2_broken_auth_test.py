@@ -113,3 +113,25 @@ tok2 = again["data"]["sessionToken"]
 check("vulnerable token is sequential/predictable",
       tok1.startswith(f"lab-{USER}-") and int(tok2.split("-")[-1]) == int(tok1.split("-")[-1]) + 1,
       (tok1, tok2))
+
+req(f"{BASE}{V}", "POST", None, auth(T))
+locked_at = None
+for i in range(8):
+    _, r = req(f"{BASE}{S}/login", "POST", {"username": USER, "password": f"guess{i}"}, auth(T))
+    if r["data"]["reason"] == "account_locked" and locked_at is None:
+        locked_at = i + 1
+check("secure endpoint locks out after 5 attempts", locked_at == 5, locked_at)
+check("secure reports zero attempts remaining", r["data"]["attemptsRemaining"] == 0)
+check("secure exposes a lockout deadline", bool(r["data"]["lockedUntil"]))
+
+_, blocked = req(f"{BASE}{S}/login", "POST", {"username": USER, "password": REAL_PW}, auth(T))
+check("secure rejects the right password while locked",
+      blocked["data"]["authenticated"] is False and blocked["data"]["reason"] == "account_locked")
+
+req(f"{BASE}{V}", "POST", None, auth(T))
+_, ok = req(f"{BASE}{S}/login", "POST", {"username": USER, "password": REAL_PW}, auth(T))
+check("secure authenticates valid credentials", ok["data"]["authenticated"] is True)
+stok = ok["data"]["sessionToken"]
+_, ok2 = req(f"{BASE}{S}/login", "POST", {"username": USER, "password": REAL_PW}, auth(T))
+check("secure token is 256-bit random hex", len(stok) == 64 and stok != ok2["data"]["sessionToken"])
+check("secure token strategy reported", ok["data"]["tokenStrategy"] == "csprng-256bit")
