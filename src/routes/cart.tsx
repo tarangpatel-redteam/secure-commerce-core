@@ -165,11 +165,15 @@ function CartContents() {
             </span>
           </div>
           <p className="mt-5 text-xs text-muted-foreground">
-            Taxes are calculated at checkout. Checkout is not part of this release.
+            Taxes are calculated at checkout from live catalogue prices.
           </p>
-          <Button variant="outline" className="mt-5 w-full" asChild>
+          <Button className="mt-5 w-full" asChild>
+            <Link to="/checkout">Proceed to checkout</Link>
+          </Button>
+          <Button variant="outline" className="mt-2 w-full" asChild>
             <Link to="/products">Continue shopping</Link>
           </Button>
+
         </aside>
       </div>
     </div>
