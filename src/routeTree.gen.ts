@@ -17,6 +17,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LabBflaRouteImport } from './routes/lab/bfla'
 import { Route as LabBolaRouteImport } from './routes/lab/bola'
+import { Route as LabBoplaRouteImport } from './routes/lab/bopla'
 import { Route as OrdersIndexRouteImport } from './routes/orders/index'
 import { Route as OrdersIdRouteImport } from './routes/orders/$id'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
@@ -81,6 +82,11 @@ const LabBflaRoute = LabBflaRouteImport.update({
 const LabBolaRoute = LabBolaRouteImport.update({
   id: '/lab/bola',
   path: '/lab/bola',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabBoplaRoute = LabBoplaRouteImport.update({
+  id: '/lab/bopla',
+  path: '/lab/bopla',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersIndexRoute = OrdersIndexRouteImport.update({
@@ -223,6 +229,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
+  '/lab/bopla': typeof LabBoplaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -258,6 +265,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
+  '/lab/bopla': typeof LabBoplaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders': typeof OrdersIndexRoute
@@ -294,6 +302,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/lab/bfla': typeof LabBflaRoute
   '/lab/bola': typeof LabBolaRoute
+  '/lab/bopla': typeof LabBoplaRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/orders/': typeof OrdersIndexRoute
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/lab/bfla'
     | '/lab/bola'
+    | '/lab/bopla'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -366,6 +376,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/lab/bfla'
     | '/lab/bola'
+    | '/lab/bopla'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders'
@@ -401,6 +412,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/lab/bfla'
     | '/lab/bola'
+    | '/lab/bopla'
     | '/orders/$id'
     | '/products/$slug'
     | '/orders/'
@@ -437,6 +449,7 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   LabBflaRoute: typeof LabBflaRoute
   LabBolaRoute: typeof LabBolaRoute
+  LabBoplaRoute: typeof LabBoplaRoute
   OrdersIdRoute: typeof OrdersIdRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   OrdersIndexRoute: typeof OrdersIndexRoute
@@ -520,6 +533,13 @@ declare module '@tanstack/react-router' {
       path: '/lab/bola'
       fullPath: '/lab/bola'
       preLoaderRoute: typeof LabBolaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/bopla': {
+      id: '/lab/bopla'
+      path: '/lab/bopla'
+      fullPath: '/lab/bopla'
+      preLoaderRoute: typeof LabBoplaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders/': {
@@ -709,6 +729,7 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   LabBflaRoute: LabBflaRoute,
   LabBolaRoute: LabBolaRoute,
+  LabBoplaRoute: LabBoplaRoute,
   OrdersIdRoute: OrdersIdRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   OrdersIndexRoute: OrdersIndexRoute,
