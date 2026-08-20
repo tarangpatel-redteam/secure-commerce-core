@@ -12,17 +12,25 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as OrdersIndexRouteImport } from './routes/orders/index'
+import { Route as OrdersIdRouteImport } from './routes/orders/$id'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as ProductsSlugRouteImport } from './routes/products/$slug'
 import { Route as ApiV1CategoriesRouteImport } from './routes/api/v1/categories'
 import { Route as ApiV1MeRouteImport } from './routes/api/v1/me'
+import { Route as ApiV1AddressesIndexRouteImport } from './routes/api/v1/addresses/index'
+import { Route as ApiV1AddressesIdRouteImport } from './routes/api/v1/addresses/$id'
 import { Route as ApiV1CartIndexRouteImport } from './routes/api/v1/cart/index'
+import { Route as ApiV1OrdersIndexRouteImport } from './routes/api/v1/orders/index'
 import { Route as ApiV1ProductsIndexRouteImport } from './routes/api/v1/products/index'
 import { Route as ApiV1ProductsSlugRouteImport } from './routes/api/v1/products/$slug'
 import { Route as ApiV1StaffCustomersRouteImport } from './routes/api/v1/staff/customers'
 import { Route as ApiV1CartItemsItemIdRouteImport } from './routes/api/v1/cart/items/$itemId'
+import { Route as ApiV1OrdersIdIndexRouteImport } from './routes/api/v1/orders/$id/index'
+import { Route as ApiV1OrdersIdCancelRouteImport } from './routes/api/v1/orders/$id/cancel'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,6 +47,11 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -47,6 +60,16 @@ const LoginRoute = LoginRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersIndexRoute = OrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersIdRoute = OrdersIdRouteImport.update({
+  id: '/orders/$id',
+  path: '/orders/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
@@ -69,9 +92,24 @@ const ApiV1MeRoute = ApiV1MeRouteImport.update({
   path: '/api/v1/me',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1AddressesIndexRoute = ApiV1AddressesIndexRouteImport.update({
+  id: '/api/v1/addresses/',
+  path: '/api/v1/addresses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1AddressesIdRoute = ApiV1AddressesIdRouteImport.update({
+  id: '/api/v1/addresses/$id',
+  path: '/api/v1/addresses/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiV1CartIndexRoute = ApiV1CartIndexRouteImport.update({
   id: '/api/v1/cart/',
   path: '/api/v1/cart/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1OrdersIndexRoute = ApiV1OrdersIndexRouteImport.update({
+  id: '/api/v1/orders/',
+  path: '/api/v1/orders/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiV1ProductsIndexRoute = ApiV1ProductsIndexRouteImport.update({
@@ -94,55 +132,89 @@ const ApiV1CartItemsItemIdRoute = ApiV1CartItemsItemIdRouteImport.update({
   path: '/api/v1/cart/items/$itemId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1OrdersIdIndexRoute = ApiV1OrdersIdIndexRouteImport.update({
+  id: '/api/v1/orders/$id/',
+  path: '/api/v1/orders/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1OrdersIdCancelRoute = ApiV1OrdersIdCancelRouteImport.update({
+  id: '/api/v1/orders/$id/cancel',
+  path: '/api/v1/orders/$id/cancel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/orders/': typeof OrdersIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/addresses/$id': typeof ApiV1AddressesIdRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
+  '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart/': typeof ApiV1CartIndexRoute
+  '/api/v1/orders/': typeof ApiV1OrdersIndexRoute
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
+  '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/orders': typeof OrdersIndexRoute
   '/products': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/addresses/$id': typeof ApiV1AddressesIdRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
+  '/api/v1/addresses': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart': typeof ApiV1CartIndexRoute
+  '/api/v1/orders': typeof ApiV1OrdersIndexRoute
   '/api/v1/products': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
+  '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/orders/$id': typeof ApiV1OrdersIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/orders/': typeof OrdersIndexRoute
   '/products/': typeof ProductsIndexRoute
   '/api/v1/categories': typeof ApiV1CategoriesRoute
   '/api/v1/me': typeof ApiV1MeRoute
+  '/api/v1/addresses/$id': typeof ApiV1AddressesIdRoute
   '/api/v1/products/$slug': typeof ApiV1ProductsSlugRoute
   '/api/v1/staff/customers': typeof ApiV1StaffCustomersRoute
+  '/api/v1/addresses/': typeof ApiV1AddressesIndexRoute
   '/api/v1/cart/': typeof ApiV1CartIndexRoute
+  '/api/v1/orders/': typeof ApiV1OrdersIndexRoute
   '/api/v1/products/': typeof ApiV1ProductsIndexRoute
   '/api/v1/cart/items/$itemId': typeof ApiV1CartItemsItemIdRoute
+  '/api/v1/orders/$id/cancel': typeof ApiV1OrdersIdCancelRoute
+  '/api/v1/orders/$id/': typeof ApiV1OrdersIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -150,66 +222,98 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/checkout'
     | '/login'
     | '/register'
+    | '/orders/$id'
     | '/products/$slug'
+    | '/orders/'
     | '/products/'
     | '/api/v1/categories'
     | '/api/v1/me'
+    | '/api/v1/addresses/$id'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
+    | '/api/v1/addresses/'
     | '/api/v1/cart/'
+    | '/api/v1/orders/'
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
+    | '/api/v1/orders/$id/cancel'
+    | '/api/v1/orders/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/account'
     | '/cart'
+    | '/checkout'
     | '/login'
     | '/register'
+    | '/orders/$id'
     | '/products/$slug'
+    | '/orders'
     | '/products'
     | '/api/v1/categories'
     | '/api/v1/me'
+    | '/api/v1/addresses/$id'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
+    | '/api/v1/addresses'
     | '/api/v1/cart'
+    | '/api/v1/orders'
     | '/api/v1/products'
     | '/api/v1/cart/items/$itemId'
+    | '/api/v1/orders/$id/cancel'
+    | '/api/v1/orders/$id'
   id:
     | '__root__'
     | '/'
     | '/account'
     | '/cart'
+    | '/checkout'
     | '/login'
     | '/register'
+    | '/orders/$id'
     | '/products/$slug'
+    | '/orders/'
     | '/products/'
     | '/api/v1/categories'
     | '/api/v1/me'
+    | '/api/v1/addresses/$id'
     | '/api/v1/products/$slug'
     | '/api/v1/staff/customers'
+    | '/api/v1/addresses/'
     | '/api/v1/cart/'
+    | '/api/v1/orders/'
     | '/api/v1/products/'
     | '/api/v1/cart/items/$itemId'
+    | '/api/v1/orders/$id/cancel'
+    | '/api/v1/orders/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  OrdersIdRoute: typeof OrdersIdRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
+  OrdersIndexRoute: typeof OrdersIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
   ApiV1CategoriesRoute: typeof ApiV1CategoriesRoute
   ApiV1MeRoute: typeof ApiV1MeRoute
+  ApiV1AddressesIdRoute: typeof ApiV1AddressesIdRoute
   ApiV1ProductsSlugRoute: typeof ApiV1ProductsSlugRoute
   ApiV1StaffCustomersRoute: typeof ApiV1StaffCustomersRoute
+  ApiV1AddressesIndexRoute: typeof ApiV1AddressesIndexRoute
   ApiV1CartIndexRoute: typeof ApiV1CartIndexRoute
+  ApiV1OrdersIndexRoute: typeof ApiV1OrdersIndexRoute
   ApiV1ProductsIndexRoute: typeof ApiV1ProductsIndexRoute
   ApiV1CartItemsItemIdRoute: typeof ApiV1CartItemsItemIdRoute
+  ApiV1OrdersIdCancelRoute: typeof ApiV1OrdersIdCancelRoute
+  ApiV1OrdersIdIndexRoute: typeof ApiV1OrdersIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -235,6 +339,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -247,6 +358,20 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders/': {
+      id: '/orders/'
+      path: '/orders'
+      fullPath: '/orders/'
+      preLoaderRoute: typeof OrdersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders/$id': {
+      id: '/orders/$id'
+      path: '/orders/$id'
+      fullPath: '/orders/$id'
+      preLoaderRoute: typeof OrdersIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/': {
@@ -277,11 +402,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1MeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/addresses/': {
+      id: '/api/v1/addresses/'
+      path: '/api/v1/addresses'
+      fullPath: '/api/v1/addresses/'
+      preLoaderRoute: typeof ApiV1AddressesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/addresses/$id': {
+      id: '/api/v1/addresses/$id'
+      path: '/api/v1/addresses/$id'
+      fullPath: '/api/v1/addresses/$id'
+      preLoaderRoute: typeof ApiV1AddressesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/v1/cart/': {
       id: '/api/v1/cart/'
       path: '/api/v1/cart'
       fullPath: '/api/v1/cart/'
       preLoaderRoute: typeof ApiV1CartIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/orders/': {
+      id: '/api/v1/orders/'
+      path: '/api/v1/orders'
+      fullPath: '/api/v1/orders/'
+      preLoaderRoute: typeof ApiV1OrdersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/v1/products/': {
@@ -312,6 +458,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiV1CartItemsItemIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/orders/$id/': {
+      id: '/api/v1/orders/$id/'
+      path: '/api/v1/orders/$id'
+      fullPath: '/api/v1/orders/$id/'
+      preLoaderRoute: typeof ApiV1OrdersIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/orders/$id/cancel': {
+      id: '/api/v1/orders/$id/cancel'
+      path: '/api/v1/orders/$id/cancel'
+      fullPath: '/api/v1/orders/$id/cancel'
+      preLoaderRoute: typeof ApiV1OrdersIdCancelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -319,17 +479,25 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  OrdersIdRoute: OrdersIdRoute,
   ProductsSlugRoute: ProductsSlugRoute,
+  OrdersIndexRoute: OrdersIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
   ApiV1CategoriesRoute: ApiV1CategoriesRoute,
   ApiV1MeRoute: ApiV1MeRoute,
+  ApiV1AddressesIdRoute: ApiV1AddressesIdRoute,
   ApiV1ProductsSlugRoute: ApiV1ProductsSlugRoute,
   ApiV1StaffCustomersRoute: ApiV1StaffCustomersRoute,
+  ApiV1AddressesIndexRoute: ApiV1AddressesIndexRoute,
   ApiV1CartIndexRoute: ApiV1CartIndexRoute,
+  ApiV1OrdersIndexRoute: ApiV1OrdersIndexRoute,
   ApiV1ProductsIndexRoute: ApiV1ProductsIndexRoute,
   ApiV1CartItemsItemIdRoute: ApiV1CartItemsItemIdRoute,
+  ApiV1OrdersIdCancelRoute: ApiV1OrdersIdCancelRoute,
+  ApiV1OrdersIdIndexRoute: ApiV1OrdersIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -87,7 +87,16 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          {signedIn ? (
+            <Link
+              to="/orders"
+              className="rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
+            >
+              Orders
+            </Link>
+          ) : null}
         </nav>
+
 
         <div className="ml-auto flex items-center gap-1">
           {signedIn ? (
@@ -112,8 +121,12 @@ export function SiteHeader() {
                   <Link to="/account">Account</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
+                  <Link to="/orders">Your orders</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link to="/cart">Your bag</Link>
                 </DropdownMenuItem>
+
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onSelect={() => void handleSignOut()}>Sign out</DropdownMenuItem>
               </DropdownMenuContent>
