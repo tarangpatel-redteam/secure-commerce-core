@@ -129,6 +129,28 @@ function HomePage() {
           ))}
         </div>
       </section>
+
+      <section className="container-page pb-20">
+        <div className="rounded-xl border border-border bg-surface p-8">
+          <p className="eyebrow">Internship assessment environment</p>
+          <h2 className="mt-2 text-2xl">A controlled Web &amp; API security lab</h2>
+          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+            This storefront doubles as a training environment. Five OWASP API Security Top 10
+            scenarios are reproduced with intentionally weak endpoints kept isolated under the
+            <code className="mx-1 rounded bg-secondary px-1.5 py-0.5">/api/v1/lab/*</code>
+            namespace, each paired with a secure implementation. Catalogue, cart, checkout and order
+            data used here is synthetic; no real payment or personal data is involved.
+          </p>
+          <div className="mt-6">
+            <Button variant="outline" asChild>
+              <Link to="/labs">
+                Open the lab index
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

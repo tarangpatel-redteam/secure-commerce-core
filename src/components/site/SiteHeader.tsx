@@ -65,6 +65,13 @@ export function SiteHeader() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                to="/labs"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                Security labs
+              </Link>
             </nav>
           </SheetContent>
         </Sheet>
@@ -95,6 +102,12 @@ export function SiteHeader() {
               Orders
             </Link>
           ) : null}
+          <Link
+            to="/labs"
+            className="rounded-md px-3 py-2 text-sm font-medium text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
+          >
+            Security labs
+          </Link>
         </nav>
 
 
