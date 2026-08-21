@@ -53,6 +53,11 @@ export function SiteFooter() {
                 Your bag
               </Link>
             </li>
+            <li>
+              <Link to="/labs" className="hover:text-foreground">
+                Security labs
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

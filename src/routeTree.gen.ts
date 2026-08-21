@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as LabsRouteImport } from './routes/labs'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LabBflaRouteImport } from './routes/lab/bfla'
@@ -86,6 +87,11 @@ const CartRoute = CartRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabsRoute = LabsRouteImport.update({
+  id: '/labs',
+  path: '/labs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -381,6 +387,7 @@ export interface FileRoutesByFullPath {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/labs': typeof LabsRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/lab/bfla': typeof LabBflaRoute
@@ -441,6 +448,7 @@ export interface FileRoutesByTo {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/labs': typeof LabsRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/lab/bfla': typeof LabBflaRoute
@@ -502,6 +510,7 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/labs': typeof LabsRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/lab/bfla': typeof LabBflaRoute
@@ -564,6 +573,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/checkout'
+    | '/labs'
     | '/login'
     | '/register'
     | '/lab/bfla'
@@ -624,6 +634,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/checkout'
+    | '/labs'
     | '/login'
     | '/register'
     | '/lab/bfla'
@@ -684,6 +695,7 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/checkout'
+    | '/labs'
     | '/login'
     | '/register'
     | '/lab/bfla'
@@ -745,6 +757,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  LabsRoute: typeof LabsRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   LabBflaRoute: typeof LabBflaRoute
@@ -829,6 +842,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/labs': {
+      id: '/labs'
+      path: '/labs'
+      fullPath: '/labs'
+      preLoaderRoute: typeof LabsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1217,6 +1237,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  LabsRoute: LabsRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   LabBflaRoute: LabBflaRoute,
